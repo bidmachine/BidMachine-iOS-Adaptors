@@ -94,11 +94,6 @@ NSString *const BDMAmazonSlotIdKey  = @"slot_uuid";
     DTBAds.sharedInstance.mraidPolicy = CUSTOM_MRAID;
     DTBAds.sharedInstance.mraidCustomVersions = @[@"1.0", @"2.0", @"3.0"];
     
-    if (BDMSdk.sharedSdk.restrictions.subjectToGDPR) {
-        [DTBAds enableGDPRSubjectWithConsentString:BDMSdk.sharedSdk.restrictions.consentString ?: BDMSdk.sharedSdk.restrictions.hasConsent ? @"1" : @"0"];
-        
-    }
-    
     if (BDMSdk.sharedSdk.restrictions.allowUserInformation) {
         [DTBAds.sharedInstance setUseGeoLocation:STKLocation.locationTrackingEnabled];
     }

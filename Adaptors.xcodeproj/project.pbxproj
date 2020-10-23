@@ -499,7 +499,8 @@
 				42C3FDA521620E95004D3784 /* BDMMRAIDInterstitialAdapter.h */,
 				42C3FDAC21620E95004D3784 /* BDMMRAIDInterstitialAdapter.m */,
 			);
-			path = BDMMRAIDAdapter;
+			name = BDMMRAIDAdapter;
+			path = BDMIABAdapter/BDMMRAIDAdapter;
 			sourceTree = "<group>";
 		};
 		429C1986216014850048F400 /* BDMVASTAdapter */ = {
@@ -510,7 +511,8 @@
 				42C3FDB121620EA2004D3784 /* BDMVASTVideoAdapter.h */,
 				42C3FDB321620EA2004D3784 /* BDMVASTVideoAdapter.m */,
 			);
-			path = BDMVASTAdapter;
+			name = BDMVASTAdapter;
+			path = BDMIABAdapter/BDMVASTAdapter;
 			sourceTree = "<group>";
 		};
 		429C19932160149B0048F400 /* BDMNASTAdapter */ = {
@@ -529,7 +531,8 @@
 				3743A6302507BB6C003DD6BF /* BDMNASTEventController.h */,
 				3743A6312507BB6C003DD6BF /* BDMNASTEventController.m */,
 			);
-			path = BDMNASTAdapter;
+			name = BDMNASTAdapter;
+			path = BDMIABAdapter/BDMNASTAdapter;
 			sourceTree = "<group>";
 		};
 		42A93E5422E70368005053A2 /* BDMFacebookAdapter */ = {

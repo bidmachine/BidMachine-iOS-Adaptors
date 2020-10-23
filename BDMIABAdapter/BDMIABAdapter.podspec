@@ -2,12 +2,12 @@ Pod::Spec.new do |spec|
   sdkVersion        = "1.6.1"
   adapterVersion    = "0"
   networkVersion    = "0.6.0"
-  sourceName        = "BDMMRAIDAdapter"
+  sourceName        = "BDMIABAdapter"
   tag               = "#{sourceName}-#{sdkVersion}.#{adapterVersion}"
 
   spec.name         = "#{sourceName}"
   spec.version      = "#{sdkVersion}.#{adapterVersion}"
-  spec.summary      = "Bidmachine adapter for MRAID"
+  spec.summary      = "Bidmachine adapter for IAB"
   spec.description  = <<-DESC
                       Appodeal’s supply-side platform is designed and built by veteran publishers,for publishers. Appodeal is not an ad network; it is a new approach to monetizing for publishers.
                       The platform is a large auction house, accompanied by a mediation layer, that exposes a publisher’s inventory to all available buyers on the market via relationships with every major ad network, RTB exchange, and DSP. Appodeal showcases publisher inventory to the advertiser, and offers the highest rate in real time.
@@ -20,9 +20,9 @@ Pod::Spec.new do |spec|
 
   spec.platform     = :ios, "9.0"
   spec.source       = { :git => 'git@github.com:bidmachine/BidMachine-iOS-Adaptors.git', :tag => "#{tag}" }
-  spec.source_files = "#{sourceName}/*.{h,m}"
+  spec.source_files = "#{sourceName}/*/*.{h,m}"
 
   spec.dependency "BidMachine", "#{sdkVersion}"
-  spec.dependency "StackIAB/StackMRAIDKit", "~> #{networkVersion}"
+  spec.dependency "StackIAB", "~> #{networkVersion}"
 
 end
