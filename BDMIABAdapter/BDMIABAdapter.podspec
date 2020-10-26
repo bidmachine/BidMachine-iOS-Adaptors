@@ -1,5 +1,5 @@
 Pod::Spec.new do |spec|
-  sdkVersion        = "1.6.1"
+  sdkVersion        = "1.7.0.0-beta"
   adapterVersion    = "0"
   networkVersion    = "0.6.0"
   sourceName        = "BDMIABAdapter"
@@ -19,10 +19,37 @@ Pod::Spec.new do |spec|
   spec.author       = { "Stack" => "https://explorestack.com/bidmachine/" }
 
   spec.platform     = :ios, "9.0"
-  spec.source       = { :git => 'git@github.com:bidmachine/BidMachine-iOS-Adaptors.git', :tag => "#{tag}" }
-  spec.source_files = "#{sourceName}/*/*.{h,m}"
+  spec.source       = { :git => 'git@github.com:bidmachine/BidMachine-iOS-Adaptors.git', :branch => "master" }
 
-  spec.dependency "BidMachine", "#{sdkVersion}"
-  spec.dependency "StackIAB", "~> #{networkVersion}"
+
+  spec.default_subspec = 'IAB'
+  spec.subspec 'IAB' do |iab|
+    iab.dependency "#{sourceName}/MRAID"
+    iab.dependency "#{sourceName}/VAST"
+    iab.dependency "#{sourceName}/NAST"
+  end
+
+  spec.subspec 'MRAID' do |mraid|
+    mraid.dependency "BidMachine", "#{sdkVersion}"
+    mraid.dependency "StackIAB/StackMRAIDKit", "~> #{networkVersion}"
+    mraid.source_files = ["BDMIABAdapter/BDMMRAIDAdapter/*.{h,m}"]
+  end
+
+  spec.subspec 'VAST' do |vast|
+    vast.dependency "BidMachine", "#{sdkVersion}"
+    vast.dependency "StackIAB/StackVASTKit", "~> #{networkVersion}"
+    vast.source_files = ["BDMIABAdapter/BDMVASTAdapter/*.{h,m}"]
+  end
+
+  spec.subspec 'NAST' do |nast|
+    nast.dependency "BidMachine", "#{sdkVersion}"
+    nast.dependency "StackIAB/StackNASTKit", "~> #{networkVersion}"
+    nast.dependency "StackIAB/StackRichMedia", "~> #{networkVersion}"
+    nast.source_files = ["BDMIABAdapter/BDMNASTAdapter/*.{h,m}"]
+  end
+
+  spec.static_framework         = true
+  spec.pod_target_xcconfig      = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+  spec.user_target_xcconfig     = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
 
 end
