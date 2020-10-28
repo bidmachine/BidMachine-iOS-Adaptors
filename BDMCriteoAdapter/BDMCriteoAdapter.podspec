@@ -1,12 +1,12 @@
 Pod::Spec.new do |spec|
-  sdkVersion        = "1.6.1"
-  adapterVersion    = "0"
+  sdkVersion        = "1.7.0.0-beta"
+  adapterVersion    = "1.7.0.0.0-beta"
   networkVersion    = "3.4.1"
   sourceName        = "BDMCriteoAdapter"
-  tag               = "#{sourceName}-#{sdkVersion}.#{adapterVersion}"
+  tag               = "#{sourceName}-#{adapterVersion}"
 
   spec.name         = "#{sourceName}"
-  spec.version      = "#{sdkVersion}.#{adapterVersion}"
+  spec.version      = "#{adapterVersion}"
   spec.summary      = "Bidmachine adapter for Criteo"
   spec.description  = <<-DESC
                       Appodeal’s supply-side platform is designed and built by veteran publishers,for publishers. Appodeal is not an ad network; it is a new approach to monetizing for publishers.
@@ -19,10 +19,14 @@ Pod::Spec.new do |spec|
   spec.author       = { "Stack" => "https://explorestack.com/bidmachine/" }
 
   spec.platform     = :ios, "9.0"
-  spec.source       = { :git => 'git@github.com:bidmachine/BidMachine-iOS-Adaptors.git', :tag => "#{tag}" }
+  spec.source       = { :git => 'git@github.com:bidmachine/BidMachine-iOS-Adaptors.git', :branch => "master" }
   spec.source_files = "#{sourceName}/*.{h,m}"
 
   spec.dependency "BidMachine", "#{sdkVersion}"
   spec.dependency "CriteoPublisherSdk", "#{networkVersion}"
+
+  spec.static_framework         = true
+  spec.pod_target_xcconfig      = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+  spec.user_target_xcconfig     = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
 
 end

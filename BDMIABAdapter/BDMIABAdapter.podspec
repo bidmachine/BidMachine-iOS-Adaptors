@@ -1,12 +1,12 @@
 Pod::Spec.new do |spec|
   sdkVersion        = "1.7.0.0-beta"
-  adapterVersion    = "0"
+  adapterVersion    = "1.7.0.0.0-beta"
   networkVersion    = "0.6.0"
   sourceName        = "BDMIABAdapter"
-  tag               = "#{sourceName}-#{sdkVersion}.#{adapterVersion}"
+  tag               = "#{sourceName}-#{adapterVersion}"
 
   spec.name         = "#{sourceName}"
-  spec.version      = "#{sdkVersion}.#{adapterVersion}"
+  spec.version      = "#{adapterVersion}"
   spec.summary      = "Bidmachine adapter for IAB"
   spec.description  = <<-DESC
                       Appodeal’s supply-side platform is designed and built by veteran publishers,for publishers. Appodeal is not an ad network; it is a new approach to monetizing for publishers.
