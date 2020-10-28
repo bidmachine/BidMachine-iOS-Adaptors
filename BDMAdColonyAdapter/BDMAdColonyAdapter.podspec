@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
-  sdkVersion        = "1.7.0.0-beta"
-  adapterVersion    = "1.7.0.0.0-beta"
-  networkVersion    = "4.3.1"
+  sdkVersion        = "1.7.0.0-Beta"
+  adapterVersion    = "1.7.0.0.0-Beta"
+  networkVersion    = "4.4.1.1"
   sourceName        = "BDMAdColonyAdapter"
   tag               = "#{sourceName}-#{adapterVersion}"
 
@@ -19,7 +19,7 @@ Pod::Spec.new do |spec|
   spec.author       = { "Stack" => "https://explorestack.com/bidmachine/" }
 
   spec.platform     = :ios, "9.0"
-  spec.source       = { :git => 'git@github.com:bidmachine/BidMachine-iOS-Adaptors.git', :branch => "master" }
+  spec.source       = { :git => 'git@github.com:bidmachine/BidMachine-iOS-Adaptors.git', :tag => "v#{tag}" }
   spec.source_files = "#{sourceName}/*.{h,m}"
 
   spec.dependency "BidMachine", "#{sdkVersion}"

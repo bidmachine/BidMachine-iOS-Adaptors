@@ -15,28 +15,10 @@
 #import "BDMVASTVideoAdapter.h"
 
 
-@interface BDMVASTVideoConfiguration : NSObject
-
-@property (nonatomic, assign) BOOL useNativeClose;
-@property (nonatomic, assign) NSTimeInterval maxDuration;
-@property (nonatomic, assign) NSTimeInterval videoSkipOffset;
-@property (nonatomic, assign) NSTimeInterval companionSkipOffset;
-
-@end
-
-@implementation BDMVASTVideoConfiguration
-
-- (NSTimeInterval)maxDuration {
-    return _maxDuration > 0 ? _maxDuration : 180;
-}
-
-@end
-
 @interface BDMVASTVideoAdapter () <STKVASTControllerDelegate, STKProductControllerDelegate>
 
 @property (nonatomic, strong) STKVASTController *videoController;
 @property (nonatomic, strong) STKProductController *productPresenter;
-@property (nonatomic, strong) BDMVASTVideoConfiguration *configuration;
 @property (nonatomic,   copy) NSDictionary<NSString *,NSString *> * contentInfo;
 
 @end
@@ -50,10 +32,16 @@
 - (void)prepareContent:(NSDictionary<NSString *,NSString *> *)contentInfo {
     NSString *rawXML        = ANY(contentInfo).from(BDMVASTCreativeKey).string;
     NSData *xmlData         = [rawXML dataUsingEncoding:NSUTF8StringEncoding];
-    
-    self.configuration      = [self configurationFrom:contentInfo];
-    self.videoController    = [STKVASTController new];
     self.contentInfo        = contentInfo;
+    
+    self.videoController    = [[STKVASTController alloc] initWithConfiguration: [STKVASTControllerConfiguration configuration:^(STKVASTControllerConfigurationBuilder *builder) {
+        builder.appendRewarded(self.rewarded);
+        builder.appendAutoclose(NO);
+        builder.appendForceCloseTime(ANY(contentInfo).from(BDMVASTUseNativeCloseKey).number.boolValue);
+        builder.appendCloseTime(ANY(contentInfo).from(BDMVASTCompanionSkipOffsetKey).number.doubleValue);
+        builder.appendMaxDuration(ANY(contentInfo).from(BDMVASTMaxDurationKey).number.doubleValue ?: 180);
+        builder.appendVideoCloseTime(ANY(contentInfo).from(BDMVASTVideoSkipOffsetKey).number.doubleValue);
+    }]];
     
     [self.videoController setDelegate:self];
     [self.videoController loadForVastXML:xmlData];
@@ -71,15 +59,6 @@
         _productPresenter.delegate = self;
     }
     return _productPresenter;
-}
-
-- (BDMVASTVideoConfiguration *)configurationFrom:(NSDictionary<NSString *,NSString *> *)contentInfo {
-    BDMVASTVideoConfiguration *configuration    = BDMVASTVideoConfiguration.new;
-    configuration.maxDuration                   = ANY(contentInfo).from(BDMVASTMaxDurationKey).number.doubleValue;
-    configuration.useNativeClose                = ANY(contentInfo).from(BDMVASTUseNativeCloseKey).number.boolValue;
-    configuration.videoSkipOffset               = ANY(contentInfo).from(BDMVASTVideoSkipOffsetKey).number.doubleValue;
-    configuration.companionSkipOffset           = ANY(contentInfo).from(BDMVASTCompanionSkipOffsetKey).number.doubleValue;
-    return configuration;
 }
 
 - (NSDictionary *(^)(NSString *))productParameters {
@@ -126,30 +105,6 @@
 }
 
 #pragma mark - STKVASTControllerDelegate parameters
-
-- (NSNumber *)closeTime {
-    return @(self.configuration.companionSkipOffset);
-}
-
-- (BOOL)forceCloseTime {
-    return self.configuration.useNativeClose;
-}
-
-- (NSNumber *)videoCloseTime {
-    return @(self.configuration.videoSkipOffset);
-}
-
-- (NSNumber *)maxDuration {
-    return @(self.configuration.maxDuration);
-}
-
-- (BOOL)isAutoclose {
-    return NO;
-}
-
-- (BOOL)isRewarded {
-    return self.rewarded;
-}
 
 - (UIViewController *)rootViewController {
     return [self.displayDelegate rootViewControllerForAdapter:self] ?: UIViewController.stk_topPresentedViewController;

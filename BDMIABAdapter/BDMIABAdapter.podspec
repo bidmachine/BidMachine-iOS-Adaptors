@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
-  sdkVersion        = "1.7.0.0-beta"
-  adapterVersion    = "1.7.0.0.0-beta"
-  networkVersion    = "0.6.0"
+  sdkVersion        = "1.7.0.0-Beta"
+  adapterVersion    = "1.7.0.0.0-Beta"
+  networkVersion    = "1.1.0"
   sourceName        = "BDMIABAdapter"
   tag               = "#{sourceName}-#{adapterVersion}"
 
@@ -19,7 +19,7 @@ Pod::Spec.new do |spec|
   spec.author       = { "Stack" => "https://explorestack.com/bidmachine/" }
 
   spec.platform     = :ios, "9.0"
-  spec.source       = { :git => 'git@github.com:bidmachine/BidMachine-iOS-Adaptors.git', :branch => "master" }
+  spec.source       = { :git => 'git@github.com:bidmachine/BidMachine-iOS-Adaptors.git', :tag => "v#{tag}" }
 
 
   spec.default_subspec = 'IAB'
