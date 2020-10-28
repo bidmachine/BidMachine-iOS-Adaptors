@@ -1,5 +1,5 @@
 Pod::Spec.new do |spec|
-  sdkVersion        = "1.7.0.0-Beta"
+  sdkVersion        = "1.7.0.0-beta"
   adapterVersion    = "1.7.0.0.0-Beta"
   networkVersion    = "21.6.6"
   sourceName        = "BDMSmaatoAdapter"
@@ -27,6 +27,6 @@ Pod::Spec.new do |spec|
   spec.dependency "smaato-ios-sdk/Modules/UnifiedBidding", "#{networkVersion}"
 
   spec.static_framework         = true
-  spec.pod_target_xcconfig      = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
-  spec.user_target_xcconfig     = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+  spec.pod_target_xcconfig      = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64 arm64e armv7 armv7s', 'EXCLUDED_ARCHS[sdk=iphoneos*]' => 'i386 x86_64' }
+  spec.user_target_xcconfig     = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64 arm64e armv7 armv7s', 'EXCLUDED_ARCHS[sdk=iphoneos*]' => 'i386 x86_64' }
 end
