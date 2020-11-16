@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   sdkVersion        = "1.7.0.0-beta"
-  adapterVersion    = "1.7.0.0.0-Beta"
-  networkVersion    = "3.4.1"
+  adapterVersion    = "1.7.0.0.1-Beta"
+  networkVersion    = "4.0.1"
   sourceName        = "BDMCriteoAdapter"
   tag               = "#{sourceName}-#{adapterVersion}"
 
