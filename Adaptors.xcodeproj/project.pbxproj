@@ -11,6 +11,7 @@
 		3743A62C2507AFF2003DD6BF /* BDMNASTMediaController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3743A62B2507AFF2003DD6BF /* BDMNASTMediaController.m */; };
 		3743A62F2507B033003DD6BF /* BDMNASTActionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3743A62E2507B033003DD6BF /* BDMNASTActionController.m */; };
 		3743A6322507BB6C003DD6BF /* BDMNASTEventController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3743A6312507BB6C003DD6BF /* BDMNASTEventController.m */; };
+		37A3EA22256279B20027DF27 /* BDMAppRollAdNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A3EA21256279B20027DF27 /* BDMAppRollAdNetwork.m */; };
 		4220558822E1FD3700E1CA89 /* BDMAdColonyFullscreenAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4220558722E1FD3700E1CA89 /* BDMAdColonyFullscreenAdapter.m */; };
 		4231D01D22E1C6E6002852CE /* BDMMyTargetFullscreenAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4231D01C22E1C6E6002852CE /* BDMMyTargetFullscreenAdapter.m */; };
 		4231D02022E1D3E7002852CE /* BDMMyTargetCustomParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 4231D01F22E1D3E7002852CE /* BDMMyTargetCustomParams.m */; };
@@ -54,6 +55,7 @@
 		8B11086ED571434945942BA9 /* Pods_BDMFacebookAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BAE3F987D328803AF794B31 /* Pods_BDMFacebookAdapter.framework */; };
 		8F1EE211D4BDE3943DAA44A6 /* Pods_BDMNASTAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51FC4F2A4008FA166B22B4D7 /* Pods_BDMNASTAdapter.framework */; };
 		959601F3457BBBFC392104A5 /* Pods_BDMAdColonyAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BDF3F514C8E2BB96D7E941E /* Pods_BDMAdColonyAdapter.framework */; };
+		9677F2B11821D6C79776EBFE /* Pods_BDMAppRollAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BF7C2179014F943C1272B16 /* Pods_BDMAppRollAdapter.framework */; };
 		B17E710318F61C37A8BCB698 /* Pods_BDMAmazonAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D359A94EFF2738C608C0A62 /* Pods_BDMAmazonAdapter.framework */; };
 		BF45CAF365A9BAAF66B85E0C /* Pods_BDMMyTargetAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB69B51905E288AE055BA079 /* Pods_BDMMyTargetAdapter.framework */; };
 		C74DECB2BA8C3A2B2E18CA28 /* Pods_BDMVungleAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA0A80F9259B951510016605 /* Pods_BDMVungleAdapter.framework */; };
@@ -64,6 +66,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		37A3EA08256279650027DF27 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4231D02622E1DD84002852CE /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -189,12 +200,17 @@
 		18AF7F9997D3A54B519BAC06 /* Pods_BDMCriteoAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BDMCriteoAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		263AD093D0E815F414745D2E /* Pods_BDMVASTAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BDMVASTAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BAE3F987D328803AF794B31 /* Pods_BDMFacebookAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BDMFacebookAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BF7C2179014F943C1272B16 /* Pods_BDMAppRollAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BDMAppRollAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		37022BD8256D487D00A9ACAC /* BidMachine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidMachine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3743A62A2507AFF2003DD6BF /* BDMNASTMediaController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDMNASTMediaController.h; sourceTree = "<group>"; };
 		3743A62B2507AFF2003DD6BF /* BDMNASTMediaController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDMNASTMediaController.m; sourceTree = "<group>"; };
 		3743A62D2507B033003DD6BF /* BDMNASTActionController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDMNASTActionController.h; sourceTree = "<group>"; };
 		3743A62E2507B033003DD6BF /* BDMNASTActionController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDMNASTActionController.m; sourceTree = "<group>"; };
 		3743A6302507BB6C003DD6BF /* BDMNASTEventController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDMNASTEventController.h; sourceTree = "<group>"; };
 		3743A6312507BB6C003DD6BF /* BDMNASTEventController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDMNASTEventController.m; sourceTree = "<group>"; };
+		37A3EA0A256279650027DF27 /* libBDMAppRollAdapter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBDMAppRollAdapter.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		37A3EA20256279B20027DF27 /* BDMAppRollAdNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDMAppRollAdNetwork.h; sourceTree = "<group>"; };
+		37A3EA21256279B20027DF27 /* BDMAppRollAdNetwork.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDMAppRollAdNetwork.m; sourceTree = "<group>"; };
 		3BDF3F514C8E2BB96D7E941E /* Pods_BDMAdColonyAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BDMAdColonyAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C1EF34CBA6F69C16569FF19 /* Pods-BDMAmazonAdapter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BDMAmazonAdapter.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-BDMAmazonAdapter/Pods-BDMAmazonAdapter.debug.xcconfig"; sourceTree = "<group>"; };
 		3F30F3B440AF6ADD3A2CF023 /* Pods-BDMMRAIDAdapter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BDMMRAIDAdapter.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-BDMMRAIDAdapter/Pods-BDMMRAIDAdapter.debug.xcconfig"; sourceTree = "<group>"; };
@@ -295,15 +311,25 @@
 		C91BAD9533A9000DB222A234 /* Pods-BDMFacebookAdapter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BDMFacebookAdapter.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-BDMFacebookAdapter/Pods-BDMFacebookAdapter.debug.xcconfig"; sourceTree = "<group>"; };
 		C9AF275D86EEF4063B093579 /* Pods-BDMMyTargetAdapter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BDMMyTargetAdapter.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-BDMMyTargetAdapter/Pods-BDMMyTargetAdapter.debug.xcconfig"; sourceTree = "<group>"; };
 		D018DEB957A24A69B05EECE5 /* Pods-BDMFacebookAdapter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BDMFacebookAdapter.release.xcconfig"; path = "../Pods/Target Support Files/Pods-BDMFacebookAdapter/Pods-BDMFacebookAdapter.release.xcconfig"; sourceTree = "<group>"; };
+		D0E1A959CE070B03CE0B837F /* Pods-BDMAppRollAdapter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BDMAppRollAdapter.release.xcconfig"; path = "../Pods/Target Support Files/Pods-BDMAppRollAdapter/Pods-BDMAppRollAdapter.release.xcconfig"; sourceTree = "<group>"; };
 		D9403D172327D2550091E61E /* libBDMAmazonAdapter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBDMAmazonAdapter.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9403D192327D2550091E61E /* BDMAmazonNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDMAmazonNetwork.h; sourceTree = "<group>"; };
 		D9403D1A2327D2550091E61E /* BDMAmazonNetwork.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDMAmazonNetwork.m; sourceTree = "<group>"; };
 		D99FF29C23069A030060FA8E /* libBDMMintegralAdapter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBDMMintegralAdapter.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7F3A8C82F088BE8A502B33B /* Pods-BDMAppRollAdapter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BDMAppRollAdapter.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-BDMAppRollAdapter/Pods-BDMAppRollAdapter.debug.xcconfig"; sourceTree = "<group>"; };
 		FB69B51905E288AE055BA079 /* Pods_BDMMyTargetAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BDMMyTargetAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB9B7001D10CD9B53A4F79AB /* Pods-BDMAdColonyAdapter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BDMAdColonyAdapter.release.xcconfig"; path = "../Pods/Target Support Files/Pods-BDMAdColonyAdapter/Pods-BDMAdColonyAdapter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		37A3EA07256279650027DF27 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9677F2B11821D6C79776EBFE /* Pods_BDMAppRollAdapter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4231D02522E1DD84002852CE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -402,6 +428,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37A3EA0B256279650027DF27 /* BDMAppRollAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				37A3EA20256279B20027DF27 /* BDMAppRollAdNetwork.h */,
+				37A3EA21256279B20027DF27 /* BDMAppRollAdNetwork.m */,
+			);
+			path = BDMAppRollAdapter;
+			sourceTree = "<group>";
+		};
 		4231D02922E1DD84002852CE /* BDMAdColonyAdapter */ = {
 			isa = PBXGroup;
 			children = (
@@ -464,6 +499,7 @@
 				D9403D182327D2550091E61E /* BDMAmazonAdapter */,
 				427D1C6A23293EEF00874ED0 /* BDMCriteoAdapter */,
 				658CA8F723619D7200B6D234 /* BDMSmaatoAdapter */,
+				37A3EA0B256279650027DF27 /* BDMAppRollAdapter */,
 				429C19692160127A0048F400 /* Products */,
 				BFCA2E1CE2BD93ED3F976496 /* Pods */,
 				86F5A514AB1665395942E1E1 /* Frameworks */,
@@ -485,6 +521,7 @@
 				D9403D172327D2550091E61E /* libBDMAmazonAdapter.a */,
 				427D1C6923293EEF00874ED0 /* libBDMCriteoAdapter.a */,
 				658CA8F623619D7200B6D234 /* libBDMSmaatoAdapter.a */,
+				37A3EA0A256279650027DF27 /* libBDMAppRollAdapter.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -587,6 +624,7 @@
 		86F5A514AB1665395942E1E1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				37022BD8256D487D00A9ACAC /* BidMachine.framework */,
 				3BDF3F514C8E2BB96D7E941E /* Pods_BDMAdColonyAdapter.framework */,
 				7D359A94EFF2738C608C0A62 /* Pods_BDMAmazonAdapter.framework */,
 				18AF7F9997D3A54B519BAC06 /* Pods_BDMCriteoAdapter.framework */,
@@ -598,6 +636,7 @@
 				4EC3948098B217AD71590D10 /* Pods_BDMTapjoyAdapter.framework */,
 				263AD093D0E815F414745D2E /* Pods_BDMVASTAdapter.framework */,
 				BA0A80F9259B951510016605 /* Pods_BDMVungleAdapter.framework */,
+				2BF7C2179014F943C1272B16 /* Pods_BDMAppRollAdapter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -627,6 +666,8 @@
 				7ED90ACF6A2BB125301D0AD6 /* Pods-BDMCriteoAdapter.release.xcconfig */,
 				4F3F81FD14F4880C5E02C6A1 /* Pods-BDMSmaatoAdapter.debug.xcconfig */,
 				55D42FCAB1F96A0542908BFC /* Pods-BDMSmaatoAdapter.release.xcconfig */,
+				F7F3A8C82F088BE8A502B33B /* Pods-BDMAppRollAdapter.debug.xcconfig */,
+				D0E1A959CE070B03CE0B837F /* Pods-BDMAppRollAdapter.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -647,6 +688,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		37A3EA09256279650027DF27 /* BDMAppRollAdapter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 37A3EA12256279650027DF27 /* Build configuration list for PBXNativeTarget "BDMAppRollAdapter" */;
+			buildPhases = (
+				E210261ED6CFC6879D54F176 /* [CP] Check Pods Manifest.lock */,
+				37A3EA06256279650027DF27 /* Sources */,
+				37A3EA07256279650027DF27 /* Frameworks */,
+				37A3EA08256279650027DF27 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BDMAppRollAdapter;
+			productName = BDMAppRollAdapter;
+			productReference = 37A3EA0A256279650027DF27 /* libBDMAppRollAdapter.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		4231D02722E1DD84002852CE /* BDMAdColonyAdapter */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4231D02E22E1DD84002852CE /* Build configuration list for PBXNativeTarget "BDMAdColonyAdapter" */;
@@ -869,9 +928,12 @@
 		429C19602160127A0048F400 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = "Stas Kochkin";
 				TargetAttributes = {
+					37A3EA09256279650027DF27 = {
+						CreatedOnToolsVersion = 12.1;
+					};
 					4231D02722E1DD84002852CE = {
 						CreatedOnToolsVersion = 10.2;
 					};
@@ -935,6 +997,7 @@
 				D9403D162327D2550091E61E /* BDMAmazonAdapter */,
 				427D1C6823293EEF00874ED0 /* BDMCriteoAdapter */,
 				658CA8F523619D7200B6D234 /* BDMSmaatoAdapter */,
+				37A3EA09256279650027DF27 /* BDMAppRollAdapter */,
 			);
 		};
 /* End PBXProject section */
@@ -1192,9 +1255,39 @@
 			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-BDMTapjoyAdapter/Pods-BDMTapjoyAdapter-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E210261ED6CFC6879D54F176 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BDMAppRollAdapter-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		37A3EA06256279650027DF27 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37A3EA22256279B20027DF27 /* BDMAppRollAdNetwork.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4231D02422E1DD84002852CE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1320,13 +1413,45 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		37A3EA10256279650027DF27 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F7F3A8C82F088BE8A502B33B /* Pods-BDMAppRollAdapter.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(EMBEDDED_CONTENT_CONTAINS_SWIFT)";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WG4VFF78ZM;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		37A3EA11256279650027DF27 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0E1A959CE070B03CE0B837F /* Pods-BDMAppRollAdapter.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(EMBEDDED_CONTENT_CONTAINS_SWIFT)";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WG4VFF78ZM;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		4231D02F22E1DD84002852CE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 12CB78823522354016B45971 /* Pods-BDMAdColonyAdapter.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NZLK3N5NR4;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1340,7 +1465,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NZLK3N5NR4;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1354,7 +1479,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NZLK3N5NR4;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1368,7 +1493,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NZLK3N5NR4;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1382,7 +1507,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NZLK3N5NR4;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1396,7 +1521,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NZLK3N5NR4;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1410,7 +1535,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WG4VFF78ZM;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1424,7 +1549,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WG4VFF78ZM;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1458,6 +1583,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1517,6 +1643,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1557,7 +1684,7 @@
 					"\"$(SRCROOT)/../Pods/Target\\ Support\\ Files/Namespaced\\ Dependencies\"",
 					"$(inherited)",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1579,7 +1706,7 @@
 					"\"$(SRCROOT)/../Pods/Target\\ Support\\ Files/Namespaced\\ Dependencies\"",
 					"$(inherited)",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1596,7 +1723,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WG4VFF78ZM;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1613,7 +1740,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WG4VFF78ZM;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1628,7 +1755,7 @@
 				CLANG_MODULES_AUTOLINK = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WG4VFF78ZM;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1643,7 +1770,7 @@
 				CLANG_MODULES_AUTOLINK = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WG4VFF78ZM;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1657,7 +1784,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NZLK3N5NR4;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1671,7 +1798,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NZLK3N5NR4;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1685,7 +1812,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NZLK3N5NR4;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1699,7 +1826,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NZLK3N5NR4;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1713,7 +1840,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WG4VFF78ZM;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1727,7 +1854,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WG4VFF78ZM;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1741,7 +1868,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WG4VFF78ZM;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1755,7 +1882,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WG4VFF78ZM;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1768,7 +1895,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WG4VFF78ZM;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1781,7 +1908,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WG4VFF78ZM;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1792,6 +1919,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		37A3EA12256279650027DF27 /* Build configuration list for PBXNativeTarget "BDMAppRollAdapter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37A3EA10256279650027DF27 /* Debug */,
+				37A3EA11256279650027DF27 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4231D02E22E1DD84002852CE /* Build configuration list for PBXNativeTarget "BDMAdColonyAdapter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

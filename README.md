@@ -83,3 +83,4 @@ or
 - *BDMSmaatoAdapter* 	= **21.6.6**
 - *BDMTapjoyAdapter* 	= **12.7.0**
 - *BDMVungleAdapter* 	= **6.8.1**
+- *BDMAppRollAdapter*     = **3.1.2**

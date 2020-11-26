@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "42675D8622E2151D008298F5"
-               BuildableName = "libBDMVungleAdapter.a"
-               BlueprintName = "BDMVungleAdapter"
+               BlueprintIdentifier = "D99FF29B23069A030060FA8E"
+               BuildableName = "libBDMMintegralAdapter.a"
+               BlueprintName = "BDMMintegralAdapter"
                ReferencedContainer = "container:Adaptors.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -50,9 +50,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "42675D8622E2151D008298F5"
-            BuildableName = "libBDMVungleAdapter.a"
-            BlueprintName = "BDMVungleAdapter"
+            BlueprintIdentifier = "D99FF29B23069A030060FA8E"
+            BuildableName = "libBDMMintegralAdapter.a"
+            BlueprintName = "BDMMintegralAdapter"
             ReferencedContainer = "container:Adaptors.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

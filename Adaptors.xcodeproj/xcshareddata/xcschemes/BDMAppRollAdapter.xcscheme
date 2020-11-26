@@ -3,7 +3,7 @@
    LastUpgradeVersion = "1220"
    version = "1.3">
    <BuildAction
-      parallelizeBuildables = "YES"
+      parallelizeBuildables = "NO"
       buildImplicitDependencies = "YES">
       <BuildActionEntries>
          <BuildActionEntry
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "42675D8622E2151D008298F5"
-               BuildableName = "libBDMVungleAdapter.a"
-               BlueprintName = "BDMVungleAdapter"
+               BlueprintIdentifier = "37A3EA09256279650027DF27"
+               BuildableName = "libBDMAppRollAdapter.a"
+               BlueprintName = "BDMAppRollAdapter"
                ReferencedContainer = "container:Adaptors.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -50,9 +50,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "42675D8622E2151D008298F5"
-            BuildableName = "libBDMVungleAdapter.a"
-            BlueprintName = "BDMVungleAdapter"
+            BlueprintIdentifier = "37A3EA09256279650027DF27"
+            BuildableName = "libBDMAppRollAdapter.a"
+            BlueprintName = "BDMAppRollAdapter"
             ReferencedContainer = "container:Adaptors.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
