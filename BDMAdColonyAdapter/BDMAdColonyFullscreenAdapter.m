@@ -15,18 +15,10 @@
 @interface BDMAdColonyFullscreenAdapter ()<AdColonyInterstitialDelegate>
 
 @property (nonatomic, strong) AdColonyInterstitial *interstitial;
-@property (nonatomic,   weak) id<BDMAdColonyAdInterstitialProvider> provider;
 
 @end
 
 @implementation BDMAdColonyFullscreenAdapter
-
-- (instancetype)initWithProvider:(id<BDMAdColonyAdInterstitialProvider>)provider {
-    if (self = [super init]) {
-        self.provider = provider;
-    }
-    return self;
-}
 
 - (UIView *)adView {
     return nil;
@@ -34,21 +26,16 @@
 
 - (void)prepareContent:(NSDictionary<NSString *,NSString *> *)contentInfo {
     NSString *zone = ANY(contentInfo).from(BDMAdColonyZoneIDKey).string;
-    if (!zone) {
-        NSError *error = [NSError bdm_errorWithCode:BDMErrorCodeNoContent description:@"AdColony zone id wasn't found"];
+    NSString *adm = ANY(contentInfo).from(BDMAdColonyAdmKey).string;
+    if (!zone || !adm) {
+        NSError *error = [NSError bdm_errorWithCode:BDMErrorCodeNoContent description:@"AdColony zone id wasn't found or adm was nil"];
         [self.loadingDelegate adapter:self failedToPrepareContentWithError:error];
         return;
     }
-    self.interstitial = [self.provider interstitialForZone:zone];
+    AdColonyAdOptions *options = [AdColonyAdOptions new];
+    [options setOption:@"adm" withStringValue:adm];
     
-    if (!self.interstitial) {
-        NSError *error = [NSError bdm_errorWithCode:BDMErrorCodeNoContent description:@"AdColony "];
-        [self.loadingDelegate adapter:self failedToPrepareContentWithError:error];
-        return;
-    }
-    
-    self.interstitial.delegate = self;
-    [self.loadingDelegate adapterPreparedContent:self];
+    [AdColony requestInterstitialInZone:zone options:options andDelegate:self];
 }
 
 - (void)present {
@@ -64,11 +51,12 @@
 #pragma mark - AdColonyInterstitialDelegate
 
 - (void)adColonyInterstitialDidLoad:(AdColonyInterstitial * _Nonnull)interstitial {
-    
+    self.interstitial = interstitial;
+    [self.loadingDelegate adapterPreparedContent:self];
 }
 
 - (void)adColonyInterstitialDidFailToLoad:(AdColonyAdRequestError * _Nonnull)error {
-    
+    [self.loadingDelegate adapter:self failedToPrepareContentWithError:error];
 }
 
 - (void)adColonyInterstitialWillOpen:(AdColonyInterstitial * _Nonnull)interstitial {

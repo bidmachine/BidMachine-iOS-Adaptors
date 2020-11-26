@@ -18,7 +18,5 @@
 @property (nonatomic, weak, nullable) id <BDMAdapterLoadingDelegate> loadingDelegate;
 @property (nonatomic, weak, nullable) id <BDMFullscreenAdapterDisplayDelegate> displayDelegate;
 
-- (nonnull instancetype)initWithProvider:(nonnull id<BDMAdColonyAdInterstitialProvider>)provider;
-
 @end
 

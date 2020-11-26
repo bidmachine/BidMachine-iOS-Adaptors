@@ -15,15 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 FOUNDATION_EXPORT NSString *const BDMAdColonyAppIDKey;
 FOUNDATION_EXPORT NSString *const BDMAdColonyZoneIDKey;
-FOUNDATION_EXPORT NSString *const BDMAdColonyZonesKey;
+FOUNDATION_EXPORT NSString *const BDMAdColonyAdmKey;
 
-@protocol BDMAdColonyAdInterstitialProvider <NSObject>
-
-- (nullable AdColonyInterstitial *)interstitialForZone:(NSString *)zone;
-
-@end
-
-@interface BDMAdColonyAdNetwork : NSObject <BDMNetwork, BDMAdColonyAdInterstitialProvider>
+@interface BDMAdColonyAdNetwork : NSObject <BDMNetwork>
 
 @end
 

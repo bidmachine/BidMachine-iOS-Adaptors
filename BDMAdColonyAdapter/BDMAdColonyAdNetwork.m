@@ -15,25 +15,17 @@
 NSString *const BDMAdColonyAppIDKey     = @"app_id";
 NSString *const BDMAdColonyZoneIDKey    = @"zone_id";
 NSString *const BDMAdColonyZonesKey     = @"zones";
+NSString *const BDMAdColonyDataKey      = @"adc_data";
+NSString *const BDMAdColonyAdmKey       = @"adm";
 
-@interface BDMAdColonyAdNetwork ()<AdColonyInterstitialDelegate>
+@interface BDMAdColonyAdNetwork ()
 
-@property (nonatomic,   copy,  nonnull) NSString *appId;
-@property (nonatomic, strong,  nonnull) NSPointerArray *interstitials;
-@property (nonatomic, strong,  nonnull) NSMutableArray <AdColonyZone *> *zones;
-@property (nonatomic,   copy, nullable) void(^interstitialCompletion)(AdColonyInterstitial *, NSError *);
+@property (nonatomic, assign) BOOL initialized;
+@property (nonatomic,   copy) NSString *appId;
 
 @end
 
 @implementation BDMAdColonyAdNetwork
-
-- (instancetype)init {
-    if (self = [super init]) {
-        self.zones = [NSMutableArray arrayWithCapacity:1];
-        self.interstitials = [NSPointerArray weakObjectsPointerArray];
-    }
-    return self;
-}
 
 - (NSString *)name {
     return @"adcolony";
@@ -45,7 +37,7 @@ NSString *const BDMAdColonyZonesKey     = @"zones";
 
 - (void)initialiseWithParameters:(NSDictionary<NSString *,id> *)parameters
                       completion:(void (^)(BOOL, NSError *))completion {
-    if (self.zones.count) {
+    if (self.initialized) {
         STK_RUN_BLOCK(completion, NO, nil);
         return;
     }
@@ -61,15 +53,14 @@ NSString *const BDMAdColonyZonesKey     = @"zones";
         return;
     }
     
-    __weak typeof(self) weakSelf = self;
     self.appId = appId;
-    AdColonyAppOptions *options = [BDMAdColonyAppOptions new];
+    self.initialized = YES;
+    
     [AdColony configureWithAppID:appId
                          zoneIDs:zones
-                         options:options
+                         options:BDMAdColonyAppOptions.new
                       completion:^(NSArray<AdColonyZone *> *zones) {
-                          [weakSelf.zones addObjectsFromArray:zones];
-                          STK_RUN_BLOCK(completion, YES, nil);
+        STK_RUN_BLOCK(completion, YES, nil);
     }];
 }
 
@@ -77,83 +68,23 @@ NSString *const BDMAdColonyZonesKey     = @"zones";
                           adUnitFormat:(BDMAdUnitFormat)adUnitFormat
                             completion:(void (^)(NSDictionary<NSString *,id> *, NSError *))completion {
     NSString *zoneId = ANY(parameters).from(BDMAdColonyZoneIDKey).string;
-    NSString *appId = self.appId;
+    NSString *signals = AdColony.collectSignals;
     // Check that we have zone id
-    if (!zoneId || !self.appId) {
+    if (!zoneId || !signals) {
         NSError *error = [NSError bdm_errorWithCode:BDMErrorCodeHeaderBiddingNetwork
                                         description:@"AdColony zone_id wasn't found"];
         STK_RUN_BLOCK(completion, nil, error);
         return;
     }
-    // Check that we have zone for id
-    AdColonyZone *zone = ANY(self.zones).filter(^BOOL(AdColonyZone *zone) {
-        return [zone.identifier isEqualToString:zoneId];
-    }).array.firstObject;
-    
-    if (!zone) {
-        NSString *reason = [NSString stringWithFormat:@"AdColony zone for id: %@ not found", zoneId];
-        NSError *error = [NSError bdm_errorWithCode:BDMErrorCodeHeaderBiddingNetwork
-                                        description:reason];
-        STK_RUN_BLOCK(completion, nil, error);
-        return;
-    }
-    
-    AdColonyInterstitial *interstitial = [self interstitialForZone:zoneId];
-    if (interstitial != nil) {
-        NSDictionary *clientParams = @{ BDMAdColonyAppIDKey   : appId,
-                                        BDMAdColonyZoneIDKey  : zoneId };
-        STK_RUN_BLOCK(completion, clientParams, nil);
-        return;
-    }
-    
-    __weak typeof(self) weakSelf = self;
-    self.interstitialCompletion = ^(AdColonyInterstitial *ad, NSError *error) {
-        if (ad) {
-            @synchronized (weakSelf) {
-                [weakSelf.interstitials addPointer:(__bridge void *)(ad)];
-            }
-            NSDictionary *clientParams = @{ BDMAdColonyAppIDKey   : appId,
-                                            BDMAdColonyZoneIDKey  : zoneId };
-            STK_RUN_BLOCK(completion, clientParams, nil);
-        } else {
-            NSError *wrapper = [error bdm_wrappedWithCode:BDMErrorCodeHeaderBiddingNetwork];
-            STK_RUN_BLOCK(completion, nil, wrapper);
-        }
+    NSDictionary *clientParams = @{ BDMAdColonyAppIDKey   : self.appId,
+                                    BDMAdColonyZoneIDKey  : zoneId,
+                                    BDMAdColonyDataKey    : signals
     };
-    [AdColony requestInterstitialInZone:zone.identifier options:nil andDelegate:self];
+    STK_RUN_BLOCK(completion, clientParams, nil);
 }
 
 - (id<BDMFullscreenAdapter>)videoAdapterForSdk:(BDMSdk *)sdk {
-    return [[BDMAdColonyFullscreenAdapter alloc] initWithProvider:self];
-}
-
-- (void)adColonyInterstitialDidLoad:(AdColonyInterstitial * _Nonnull)interstitial {
-    STK_RUN_BLOCK(self.interstitialCompletion, interstitial, nil);
-}
-
-- (void)adColonyInterstitialDidFailToLoad:(AdColonyAdRequestError * _Nonnull)error {
-    STK_RUN_BLOCK(self.interstitialCompletion, nil, error);
-}
-
-#pragma mark - BDMAdColonyAdInterstitialProvider
-
-- (AdColonyInterstitial *)interstitialForZone:(NSString *)zone {
-    AdColonyInterstitial *interstitial;
-    NSUInteger interstitialIdx = 0;
-    for (NSUInteger idx = 0; idx < self.interstitials.count; ++idx) {
-        if ([[(AdColonyInterstitial *)[self.interstitials pointerAtIndex:idx] zoneID] isEqualToString:zone]) {
-            interstitial = [self.interstitials pointerAtIndex:idx];
-            interstitialIdx = idx;
-            break;
-        }
-    }
-    
-    if (interstitial.expired) {
-        [self.interstitials removePointerAtIndex:interstitialIdx];
-        return nil;
-    }
-    
-    return interstitial;
+    return [BDMAdColonyFullscreenAdapter new];
 }
 
 @end
