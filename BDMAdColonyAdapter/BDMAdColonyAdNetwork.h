@@ -13,7 +13,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-FOUNDATION_EXPORT NSString *const BDMAdColonyAppIDKey;
 FOUNDATION_EXPORT NSString *const BDMAdColonyZoneIDKey;
 FOUNDATION_EXPORT NSString *const BDMAdColonyAdmKey;
 

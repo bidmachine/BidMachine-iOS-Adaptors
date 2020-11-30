@@ -15,7 +15,7 @@
 NSString *const BDMAdColonyAppIDKey     = @"app_id";
 NSString *const BDMAdColonyZoneIDKey    = @"zone_id";
 NSString *const BDMAdColonyZonesKey     = @"zones";
-NSString *const BDMAdColonyDataKey      = @"adc_data";
+NSString *const BDMAdColonyDataKey      = @"data";
 NSString *const BDMAdColonyAdmKey       = @"adm";
 
 @interface BDMAdColonyAdNetwork ()
