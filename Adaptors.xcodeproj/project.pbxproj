@@ -211,6 +211,7 @@
 		37A3EA0A256279650027DF27 /* libBDMAppRollAdapter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBDMAppRollAdapter.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		37A3EA20256279B20027DF27 /* BDMAppRollAdNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDMAppRollAdNetwork.h; sourceTree = "<group>"; };
 		37A3EA21256279B20027DF27 /* BDMAppRollAdNetwork.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDMAppRollAdNetwork.m; sourceTree = "<group>"; };
+		37E767732577A0A9005A0075 /* BidMachine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidMachine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BDF3F514C8E2BB96D7E941E /* Pods_BDMAdColonyAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BDMAdColonyAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C1EF34CBA6F69C16569FF19 /* Pods-BDMAmazonAdapter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BDMAmazonAdapter.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-BDMAmazonAdapter/Pods-BDMAmazonAdapter.debug.xcconfig"; sourceTree = "<group>"; };
 		3F30F3B440AF6ADD3A2CF023 /* Pods-BDMMRAIDAdapter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BDMMRAIDAdapter.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-BDMMRAIDAdapter/Pods-BDMMRAIDAdapter.debug.xcconfig"; sourceTree = "<group>"; };
@@ -624,6 +625,7 @@
 		86F5A514AB1665395942E1E1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				37E767732577A0A9005A0075 /* BidMachine.framework */,
 				37022BD8256D487D00A9ACAC /* BidMachine.framework */,
 				3BDF3F514C8E2BB96D7E941E /* Pods_BDMAdColonyAdapter.framework */,
 				7D359A94EFF2738C608C0A62 /* Pods_BDMAmazonAdapter.framework */,

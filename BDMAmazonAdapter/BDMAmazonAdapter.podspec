@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
-  sdkVersion        = "1.7.0.0-beta"
-  adapterVersion    = "1.7.0.0.0-Beta"
+  sdkVersion        = "1.7.0.1-Beta"
+  adapterVersion    = "1.7.0.1.0-Beta"
   networkVersion    = "3.3.0"
   sourceName        = "BDMAmazonAdapter"
   tag               = "#{sourceName}-#{adapterVersion}"
@@ -18,7 +18,7 @@ Pod::Spec.new do |spec|
   spec.license      = { :type => 'GPL 3.0', :file => 'LICENSE' }
   spec.author       = { "Stack" => "https://explorestack.com/bidmachine/" }
 
-  spec.platform     = :ios, "9.0"
+  spec.platform     = :ios, "10.0"
   spec.source       = { :git => 'git@github.com:bidmachine/BidMachine-iOS-Adaptors.git', :tag => "v#{tag}" }
   spec.source_files = "#{sourceName}/*.{h,m}"
 
