@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   sdkVersion        = "1.7.0.1-Beta"
   adapterVersion    = "1.7.0.1.1-Beta"
-  networkVersion    = "5.9.3"
+  networkVersion    = "5.9.7"
   sourceName        = "BDMMyTargetAdapter"
   tag               = "#{sourceName}-#{adapterVersion}"
 
