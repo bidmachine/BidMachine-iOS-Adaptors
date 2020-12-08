@@ -39,6 +39,7 @@
     }
     
     self.nativeAd = [[MTRGNativeAd alloc] initWithSlotId:slotId];
+    self.nativeAd.adChoicesPlacement = MTRGAdChoicesPlacementTopRight;
     self.nativeAd.delegate = self;
     
     [BDMMyTargetCustomParams populate:self.nativeAd.customParams];

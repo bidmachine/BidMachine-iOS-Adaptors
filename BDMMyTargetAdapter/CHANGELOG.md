@@ -1,3 +1,7 @@
+## 1.7.0.1.1-Beta
+
+- *myTargetSDK* **5.9.7**
+
 ## 1.7.0.1.0-Beta
 
 - *myTargetSDK* **5.9.3**

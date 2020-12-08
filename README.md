@@ -79,8 +79,8 @@ or
 - *BDMCriteoAdapter* 	= **4.0.1**
 - *BDMFacebookAdapter* 	= **6.2.0**
 - *BDMIABAdapter* 		= **1.1.0**
-- *BDMMyTargetAdapter* 	= **5.9.3**
-- *BDMSmaatoAdapter* 	= **21.6.6**
+- *BDMMyTargetAdapter* 	= **5.9.7**
+- *BDMSmaatoAdapter* 	= **21.6.8**
 - *BDMTapjoyAdapter* 	= **12.7.0**
 - *BDMVungleAdapter* 	= **6.8.1**
 - *BDMAppRollAdapter*     = **3.1.2**
