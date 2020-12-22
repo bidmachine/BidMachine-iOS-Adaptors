@@ -15,8 +15,6 @@ NSString *const BDMCriteoIDKey                      = @"publisher_id";
 NSString *const BDMCriteoPriceKey                   = @"price";
 NSString *const BDMCriteoAdUnitIDKey                = @"ad_unit_id";
 NSString *const BDMCriteoOrienationKey              = @"orientation";
-NSString *const BDMCriteoBannerAdUnitsKey           = @"banner_ad_units";
-NSString *const BDMCriteoInterstitialAdUnitsKey     = @"interstitial_ad_units";
 
 @interface BDMCriteoAdNetwork ()
 
@@ -43,8 +41,10 @@ NSString *const BDMCriteoInterstitialAdUnitsKey     = @"interstitial_ad_units";
     return _bidStorage;
 }
 
-- (void)initialiseWithParameters:(NSDictionary<NSString *,id> *)parameters
-                      completion:(void (^)(BOOL, NSError *))completion {
+- (void)initializeWithParameters:(BDMStringToStringMap *)parameters
+                           units:(NSArray<BDMAdUnit *> *)units
+                      completion:(BDMInitializeBiddingNetworkBlock)completion
+{
     [self syncMetadata];
     if (self.hasBeenInitialized) {
         STK_RUN_BLOCK(completion, NO, nil);
@@ -52,8 +52,24 @@ NSString *const BDMCriteoInterstitialAdUnitsKey     = @"interstitial_ad_units";
     }
     
     NSString *publisherId = ANY(parameters).from(BDMCriteoIDKey).string;
-    NSArray *bannerAdUnitsArray = ANY(parameters).from(BDMCriteoBannerAdUnitsKey).arrayOfString;
-    NSArray *interstitialAdUnitsArray = ANY(parameters).from(BDMCriteoInterstitialAdUnitsKey).arrayOfString;
+    
+    NSArray *bannerAdUnitsArray = ANY(units)
+    .flatMap(^id(BDMAdUnit *unit){
+        if ((unit.format >= 0) && (unit.format <= 3)) {
+            return ANY(unit.params).from(BDMCriteoAdUnitIDKey).string;
+        }
+        return nil;
+    })
+    .arrayOfString;
+    
+    NSArray *interstitialAdUnitsArray = ANY(units)
+    .flatMap(^id(BDMAdUnit *unit){
+        if ((unit.format >= 4) && (unit.format <= 6)) {
+            return ANY(unit.params).from(BDMCriteoAdUnitIDKey).string;
+        }
+        return nil;
+    })
+    .arrayOfString;
     if (!NSString.stk_isValid(publisherId)) {
         NSError *error = [NSError bdm_errorWithCode:BDMErrorCodeHeaderBiddingNetwork
                                         description:@"Criteo adapter was not receive valid publisher id"];
@@ -76,11 +92,11 @@ NSString *const BDMCriteoInterstitialAdUnitsKey     = @"interstitial_ad_units";
     STK_RUN_BLOCK(completion, YES, nil);
 }
 
-- (void)collectHeaderBiddingParameters:(NSDictionary<NSString *,id> *)parameters
-                          adUnitFormat:(BDMAdUnitFormat)adUnitFormat
-                            completion:(void (^)(NSDictionary<NSString *,id> * _Nullable, NSError * _Nullable))completion {
-    NSString *adUnitId = ANY(parameters).from(BDMCriteoAdUnitIDKey).string;
-    NSString *orientation = ANY(parameters).from(BDMCriteoOrienationKey).string;
+- (void)collectHeaderBiddingParameters:(BDMAdUnit *)unit
+                            completion:(BDMCollectBiddingParamtersBlock)completion
+{
+    NSString *adUnitId = ANY(unit.params).from(BDMCriteoAdUnitIDKey).string;
+    NSString *orientation = ANY(unit.params).from(BDMCriteoOrienationKey).string;
     
     if (!NSString.stk_isValid(adUnitId) || ![self isValidOrientation:orientation]) {
         NSError *error = [NSError bdm_errorWithCode:BDMErrorCodeHeaderBiddingNetwork
@@ -91,7 +107,7 @@ NSString *const BDMCriteoInterstitialAdUnitsKey     = @"interstitial_ad_units";
     [self syncMetadata];
     
     __weak typeof(self) weakSelf = self;
-    CRAdUnit *adUnit = [self adUnitByFormat:adUnitFormat adUnitId:adUnitId];
+    CRAdUnit *adUnit = [self adUnitByFormat:unit.format adUnitId:adUnitId];
     [[Criteo sharedCriteo] loadBidForAdUnit:adUnit responseHandler:^(CRBid * _Nullable bid) {
         if (!bid) {
             NSError *error = [NSError bdm_errorWithCode:BDMErrorCodeHeaderBiddingNetwork
@@ -99,7 +115,7 @@ NSString *const BDMCriteoInterstitialAdUnitsKey     = @"interstitial_ad_units";
             STK_RUN_BLOCK(completion, nil, error);
         } else {
             NSMutableDictionary *bidding = [[NSMutableDictionary alloc] initWithCapacity:2];
-            bidding[BDMCriteoPriceKey] = @(bid.price);
+            bidding[BDMCriteoPriceKey] = @(bid.price).stringValue;
             bidding[BDMCriteoAdUnitIDKey] = adUnitId;
             
             [weakSelf.bidStorage setObject:bid forKey:adUnitId];

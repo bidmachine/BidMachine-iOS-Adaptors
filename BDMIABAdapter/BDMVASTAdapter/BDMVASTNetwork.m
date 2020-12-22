@@ -9,6 +9,8 @@
 #import "BDMVASTNetwork.h"
 #import "BDMVASTVideoAdapter.h"
 
+#import <StackVASTKit/StackVASTKit.h>
+
 
 NSString *const BDMVASTCreativeKey                  = @"creative";
 NSString *const BDMVASTMaxDurationKey               = @"max_duration";
@@ -25,7 +27,7 @@ NSString *const BDMVASTCompanionSkipOffsetKey       = @"companion_skip_offset";
 }
 
 - (NSString *)sdkVersion {
-    return @"1.3.18";
+    return StackVASTKitVersion;
 }
 
 - (id<BDMFullscreenAdapter>)videoAdapterForSdk:(BDMSdk *)sdk {

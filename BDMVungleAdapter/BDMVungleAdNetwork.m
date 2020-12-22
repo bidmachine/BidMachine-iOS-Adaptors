@@ -18,12 +18,10 @@ NSString *const BDMVunglePlacementIDKey         = @"placement_id";
 
 @interface BDMVungleAdNetwork () <VungleSDKDelegate, VungleSDKHeaderBidding>
 
-typedef void(^VungleHeaderBiddingCompletion)(NSDictionary<NSString *,id> *, NSError *);
-
 @property (nonatomic, copy, nullable) NSString *appId;
-@property (nonatomic, copy, nullable) void(^initialisationCompletion)(BOOL, NSError *);
+@property (nonatomic, copy, nullable) BDMInitializeBiddingNetworkBlock initialisationCompletion;
 @property (nonatomic, copy,  nonnull) NSHashTable <BDMVungleFullscreenAdapter *> *delegates;
-@property (nonatomic, copy,  nonnull) NSMapTable <NSString *, VungleHeaderBiddingCompletion> *completionByPlacement;
+@property (nonatomic, copy,  nonnull) NSMapTable <NSString *, BDMCollectBiddingParamtersBlock> *completionByPlacement;
 
 @end
 
@@ -38,7 +36,7 @@ typedef void(^VungleHeaderBiddingCompletion)(NSDictionary<NSString *,id> *, NSEr
     return VungleSDKVersion;
 }
 
-- (NSMapTable<NSString *,VungleHeaderBiddingCompletion> *)completionByPlacement {
+- (NSMapTable<NSString *,BDMCollectBiddingParamtersBlock> *)completionByPlacement {
     if (!_completionByPlacement) {
         _completionByPlacement = [NSMapTable strongToStrongObjectsMapTable];
     }
@@ -52,8 +50,10 @@ typedef void(^VungleHeaderBiddingCompletion)(NSDictionary<NSString *,id> *, NSEr
     return _delegates;
 }
 
-- (void)initialiseWithParameters:(NSDictionary<NSString *,id> *)parameters
-                      completion:(void (^)(BOOL, NSError *))completion {
+- (void)initializeWithParameters:(BDMStringToStringMap *)parameters
+                           units:(NSArray<BDMAdUnit *> *)units
+                      completion:(BDMInitializeBiddingNetworkBlock)completion
+{
     [self syncMetadata];
     if ([VungleSDK.sharedSDK isInitialized]) {
         STK_RUN_BLOCK(completion, NO, nil);
@@ -80,10 +80,10 @@ typedef void(^VungleHeaderBiddingCompletion)(NSDictionary<NSString *,id> *, NSEr
     }
 }
 
-- (void)collectHeaderBiddingParameters:(NSDictionary<NSString *,id> *)parameters
-                          adUnitFormat:(BDMAdUnitFormat)adUnitFormat
-                            completion:(void (^)(NSDictionary<NSString *,id> *, NSError *))completion {
-    NSString *placement = ANY(parameters).from(BDMVunglePlacementIDKey).string;
+- (void)collectHeaderBiddingParameters:(BDMAdUnit *)unit
+                            completion:(BDMCollectBiddingParamtersBlock)completion
+{
+    NSString *placement = ANY(unit.params).from(BDMVunglePlacementIDKey).string;
     
     if (!placement) {
         NSError *error = [NSError bdm_errorWithCode:BDMErrorCodeInternal description:@"Vungle placement id is not valid string"];
@@ -178,13 +178,18 @@ typedef void(^VungleHeaderBiddingCompletion)(NSDictionary<NSString *,id> *, NSEr
 
 #pragma mark - VungleSDKHeaderBidding
 
-- (void)placementWillBeginCaching:(NSString *)placement
-                     withBidToken:(NSString *)bidToken {
-    // TODO:?
-}
-
 - (void)placementPrepared:(NSString *)placement
              withBidToken:(NSString *)bidToken {
+    
+    if ([VungleSDK.sharedSDK isAdCachedForPlacementID:placement] && !bidToken) {
+        NSString *description = [NSString stringWithFormat:@"Vungle bid token is not available for placement %@", placement];
+        NSError *error = [NSError bdm_errorWithCode:BDMErrorCodeInternal
+                                        description:description];
+        STK_RUN_BLOCK([self.completionByPlacement objectForKey:placement], nil, error);
+        [self.completionByPlacement removeObjectForKey:placement];
+        return;
+    }
+    
     NSMutableDictionary *bidding = [NSMutableDictionary dictionaryWithCapacity:2];
     bidding[BDMVunglePlacementIDKey] = placement;
     bidding[BDMVungleTokenKey] = bidToken;

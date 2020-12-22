@@ -16,8 +16,6 @@ FOUNDATION_EXPORT NSString *const BDMCriteoIDKey;
 FOUNDATION_EXPORT NSString *const BDMCriteoPriceKey;
 FOUNDATION_EXPORT NSString *const BDMCriteoAdUnitIDKey;
 FOUNDATION_EXPORT NSString *const BDMCriteoOrienationKey;
-FOUNDATION_EXPORT NSString *const BDMCriteoBannerAdUnitsKey;
-FOUNDATION_EXPORT NSString *const BDMCriteoInterstitialAdUnitsKey;
 
 @protocol BDMCriteoAdNetworkProvider <NSObject>
 

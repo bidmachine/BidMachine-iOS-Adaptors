@@ -9,6 +9,8 @@
 #import "BDMNASTNetwork.h"
 #import "BDMNASTNativeAdServiceAdapter.h"
 
+#import <StackNASTKit/StackNASTKit.h>
+
 
 @implementation BDMNASTNetwork
 
@@ -17,7 +19,7 @@
 }
 
 - (NSString *)sdkVersion {
-    return @"2.0";
+    return StackNASTKitVersion;
 }
 
 - (id<BDMNativeAdServiceAdapter>)nativeAdAdapterForSdk:(BDMSdk *)sdk {

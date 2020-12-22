@@ -41,7 +41,7 @@
 
 @property (nonatomic, strong) DTBAdLoader *loader;
 @property (nonatomic, copy) BDMAmazonAdLoaderCompletion completion;
-@property (nonatomic, copy) NSDictionary <NSString *, id> *parameters;
+@property (nonatomic, copy) NSDictionary <NSString *, NSString *> *parameters;
 @property (nonatomic, assign) BDMAdUnitFormat format;
 
 
@@ -50,7 +50,7 @@
 @implementation BDMAmazonAdLoader
 
 - (instancetype)initWithFormat:(BDMAdUnitFormat)foramt
-              serverParameters:(NSDictionary<NSString *,id> *)parameters {
+              serverParameters:(NSDictionary<NSString *, NSString *> *)parameters {
     if (self = [super init]) {
         self.format = foramt;
         self.parameters = parameters;

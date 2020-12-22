@@ -30,18 +30,19 @@ NSString *const BDMMyTargetBidTokenKey  = @"bidder_token";
     return MTRGVersion.currentVersion;
 }
 
-- (void)initialiseWithParameters:(NSDictionary<NSString *,id> *)parameters
-                      completion:(void (^)(BOOL, NSError *))completion {
+- (void)initializeWithParameters:(BDMStringToStringMap *)parameters
+                           units:(NSArray<BDMAdUnit *> *)units
+                      completion:(BDMInitializeBiddingNetworkBlock)completion
+{
     [self syncMetadata];
     STK_RUN_BLOCK(completion, NO, nil);
 }
 
-- (void)collectHeaderBiddingParameters:(NSDictionary<NSString *,id> *)parameters
-                          adUnitFormat:(BDMAdUnitFormat)adUnitFormat
-                            completion:(void (^)(NSDictionary<NSString *,id> * clientParams,
-                                                 NSError *error))completion {
+- (void)collectHeaderBiddingParameters:(BDMAdUnit *)unit
+                            completion:(BDMCollectBiddingParamtersBlock)completion
+{
     [self syncMetadata];
-    NSString *slotId = ANY(parameters).from(BDMMyTargetSlotIDKey).string;
+    NSString *slotId = ANY(unit.params).from(BDMMyTargetSlotIDKey).string;
     NSString *bidToken = MTRGManager.getBidderToken;
     NSDictionary *clientParams;
     NSError *error;

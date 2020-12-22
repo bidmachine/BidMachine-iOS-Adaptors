@@ -15,7 +15,7 @@
 @class BDMAmazonAdLoader;
 
 typedef void(^BDMAmazonAdLoaderCompletion)(BDMAmazonAdLoader *_Nonnull loader,
-                                           NSDictionary <NSString *, id> *_Nullable biddingParameters,
+                                           NSDictionary <NSString *, NSString *> *_Nullable biddingParameters,
                                            NSError *_Nullable error);
 
 
@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 - (instancetype)initWithFormat:(BDMAdUnitFormat)foramt
-              serverParameters:(NSDictionary<NSString *,id> *)parameters;
+              serverParameters:(NSDictionary<NSString *, NSString *> *)parameters;
 
 - (void)prepareWithCompletion:(BDMAmazonAdLoaderCompletion)completion;
 

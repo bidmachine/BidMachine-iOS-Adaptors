@@ -42,8 +42,10 @@ NSString *const BDMAmazonSlotIdKey  = @"slot_uuid";
     return _loaders;
 }
 
-- (void)initialiseWithParameters:(NSDictionary<NSString *,id> *)parameters
-                      completion:(void (^)(BOOL, NSError * _Nullable))completion {
+- (void)initializeWithParameters:(BDMStringToStringMap *)parameters
+                           units:(NSArray<BDMAdUnit *> *)units
+                      completion:(BDMInitializeBiddingNetworkBlock)completion
+{
     [self syncMetadata];
     if (self.hasBeenInitialized) {
         STK_RUN_BLOCK(completion, NO, nil);
@@ -63,18 +65,18 @@ NSString *const BDMAmazonSlotIdKey  = @"slot_uuid";
     STK_RUN_BLOCK(completion, YES, nil);
 }
 
-- (void)collectHeaderBiddingParameters:(NSDictionary<NSString *,id> *)parameters
-                          adUnitFormat:(BDMAdUnitFormat)adUnitFormat
-                            completion:(void (^)(NSDictionary<NSString *,id> *, NSError *))completion {
-    BDMAmazonAdLoader *loader = [[BDMAmazonAdLoader alloc] initWithFormat:adUnitFormat
-                                                         serverParameters:parameters];
+- (void)collectHeaderBiddingParameters:(BDMAdUnit *)unit
+                            completion:(BDMCollectBiddingParamtersBlock)completion
+{
+    BDMAmazonAdLoader *loader = [[BDMAmazonAdLoader alloc] initWithFormat:unit.format
+                                                         serverParameters:unit.params];
     [self.loaders addObject:loader];
     __weak typeof(self) weakSelf = self;
     [loader prepareWithCompletion:^(BDMAmazonAdLoader *loader,
-                                    NSDictionary<NSString *,id> *biddingParameters,
+                                    NSDictionary<NSString *, NSString *> *biddingParameters,
                                     NSError *error) {
         [weakSelf.loaders removeObject:loader];
-        STK_RUN_BLOCK(completion, parameters, error);
+        STK_RUN_BLOCK(completion, biddingParameters, error);
     }];
 }
 

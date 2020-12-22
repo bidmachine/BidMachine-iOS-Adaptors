@@ -38,8 +38,10 @@ typedef void (^BDMSmaatoCompletionBlock)(SMAUbBid *bid, NSError *error);
     return SmaatoSDK.sdkVersion;
 }
 
-- (void)initialiseWithParameters:(NSDictionary<NSString *,id> *)parameters
-                      completion:(void (^)(BOOL, NSError * _Nullable))completion {
+- (void)initializeWithParameters:(BDMStringToStringMap *)parameters
+                           units:(NSArray<BDMAdUnit *> *)units
+                      completion:(BDMInitializeBiddingNetworkBlock)completion
+{
     [self syncMetadata];
     
     if (self.initialized) {
@@ -61,10 +63,10 @@ typedef void (^BDMSmaatoCompletionBlock)(SMAUbBid *bid, NSError *error);
     }
 }
 
-- (void)collectHeaderBiddingParameters:(NSDictionary<NSString *,id> *)parameters
-                          adUnitFormat:(BDMAdUnitFormat)adUnitFormat
-                            completion:(void (^)(NSDictionary<NSString *,id> * _Nullable, NSError * _Nullable))completion {
-    NSString *adSpaceId = ANY(parameters).from(BDMSmaatoSpaceIDKey).string;
+- (void)collectHeaderBiddingParameters:(BDMAdUnit *)unit
+                            completion:(BDMCollectBiddingParamtersBlock)completion
+{
+    NSString *adSpaceId = ANY(unit.params).from(BDMSmaatoSpaceIDKey).string;
     if (!adSpaceId) {
         NSError *error = [NSError bdm_errorWithCode:BDMErrorCodeHeaderBiddingNetwork
                                         description:@"Smaato adapter was not receive valid bidding data"];
@@ -79,7 +81,7 @@ typedef void (^BDMSmaatoCompletionBlock)(SMAUbBid *bid, NSError *error);
         bidding[BDMSmaatoIDKey] = weakself.publisherId;
         
         if (bid) {
-            bidding[BDMSmaatoPriceKey] = @(bid.bidPrice);
+            bidding[BDMSmaatoPriceKey] = @(bid.bidPrice).stringValue;
         } else {
             error = [NSError bdm_errorWithCode:BDMErrorCodeHeaderBiddingNetwork
                                    description:@"Smaato can't prebid adapter"];
@@ -89,7 +91,7 @@ typedef void (^BDMSmaatoCompletionBlock)(SMAUbBid *bid, NSError *error);
     };
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [weakself prebidSmaatoAdapter:adUnitFormat
+        [weakself prebidSmaatoAdapter:unit.format
                             adSpaceId:adSpaceId
                            completion:[smaatoCompletion copy]];
     });

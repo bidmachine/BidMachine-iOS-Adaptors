@@ -25,7 +25,6 @@ NSString *const BDMFacebookBidPayloadIDKey      = @"bid_payload";
 
 @property (nonatomic, copy) NSString *appId;
 @property (nonatomic, assign) BOOL isInitialised;
-@property (nonatomic, copy) void(^initialisationCompletion)(BOOL, NSError *);
 
 @end
 
@@ -40,15 +39,20 @@ NSString *const BDMFacebookBidPayloadIDKey      = @"bid_payload";
     return FB_AD_SDK_VERSION;
 }
 
-- (void)initialiseWithParameters:(NSDictionary<NSString *,id> *)parameters
-                      completion:(void (^)(BOOL, NSError *))completion {
+- (void)initializeWithParameters:(BDMStringToStringMap *)parameters
+                           units:(NSArray<BDMAdUnit *> *)units
+                      completion:(BDMInitializeBiddingNetworkBlock)completion
+{
     [self syncMetadata];
     if (self.isInitialised) {
         STK_RUN_BLOCK(completion, NO, nil);
         return;
     }
     
-    NSArray <NSString *> *placements = ANY(parameters).from(BDMFacebookPlacementIDsKey).arrayOfString;
+    NSArray <NSString *> *placements = ANY(units)
+    .flatMap(^id(BDMAdUnit *unit){ return ANY(unit.params).from(BDMFacebookPlacementIDKey).string;})
+    .arrayOfString;
+    
     self.appId = ANY(parameters).from(BDMFacebookAppIDKey).string; 
     
     if (!placements.count) {
@@ -60,7 +64,6 @@ NSString *const BDMFacebookBidPayloadIDKey      = @"bid_payload";
     
     FBAdInitSettings *settings = [[FBAdInitSettings alloc] initWithPlacementIDs:placements
                                                                mediationService:@"bidmachine"];
-    self.initialisationCompletion = completion;
     __weak typeof(self) weakSelf = self;
     [FBAudienceNetworkAds initializeWithSettings:settings
                                completionHandler:^(FBAdInitResults *results) {
@@ -68,15 +71,14 @@ NSString *const BDMFacebookBidPayloadIDKey      = @"bid_payload";
                                                                 description:@"FBAudienceNetwork initialisation was unsuccessful"];
         
         weakSelf.isInitialised = results.success;
-        STK_RUN_BLOCK(weakSelf.initialisationCompletion, YES, error);
-        weakSelf.initialisationCompletion = nil;
+        STK_RUN_BLOCK(completion, YES, error);
     }];
 }
 
-- (void)collectHeaderBiddingParameters:(NSDictionary<NSString *,id> *)parameters
-                          adUnitFormat:(BDMAdUnitFormat)adUnitFormat
-                            completion:(void (^)(NSDictionary<NSString *,id> *, NSError *))completion {
-    NSString *placement = ANY(parameters).from(BDMFacebookPlacementIDKey).string;
+- (void)collectHeaderBiddingParameters:(BDMAdUnit *)unit
+                            completion:(BDMCollectBiddingParamtersBlock)completion
+{
+    NSString *placement = ANY(unit.params).from(BDMFacebookPlacementIDKey).string;
     NSString *token = FBAdSettings.bidderToken;
     NSString *appId = self.appId;
     if (!placement || !token || !appId) {

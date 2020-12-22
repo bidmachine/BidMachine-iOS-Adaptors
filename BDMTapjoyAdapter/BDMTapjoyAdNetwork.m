@@ -18,7 +18,7 @@ NSString *const BDMTapjoyPlacementKey     = @"placement_name";
 
 @interface BDMTapjoyAdNetwork ()
 
-@property (nonatomic, copy) void(^completion)(BOOL, NSError *);
+@property (nonatomic, copy) BDMInitializeBiddingNetworkBlock initialisationCompletion;
 
 @end
 
@@ -44,8 +44,10 @@ NSString *const BDMTapjoyPlacementKey     = @"placement_name";
     return Tapjoy.getVersion;
 }
 
-- (void)initialiseWithParameters:(NSDictionary<NSString *,id> *)parameters
-                      completion:(void (^)(BOOL, NSError *))completion {
+- (void)initializeWithParameters:(BDMStringToStringMap *)parameters
+                           units:(NSArray<BDMAdUnit *> *)units
+                      completion:(BDMInitializeBiddingNetworkBlock)completion
+{
     [self syncMetadata];
     if (Tapjoy.isLimitedConnected) {
         STK_RUN_BLOCK(completion, NO, nil);
@@ -53,7 +55,7 @@ NSString *const BDMTapjoyPlacementKey     = @"placement_name";
     }
     NSString *sdkKey = ANY(parameters).from(BDMTapjoySDKKey).string;
     if (sdkKey) {
-        self.completion = completion;
+        self.initialisationCompletion = completion;
         [Tapjoy limitedConnect:sdkKey];
     } else {
         NSError *error = [NSError bdm_errorWithCode:BDMErrorCodeHeaderBiddingNetwork
@@ -62,13 +64,13 @@ NSString *const BDMTapjoyPlacementKey     = @"placement_name";
     }
 }
 
-- (void)collectHeaderBiddingParameters:(NSDictionary<NSString *,id> *)parameters
-                          adUnitFormat:(BDMAdUnitFormat)adUnitFormat
-                            completion:(void (^)(NSDictionary<NSString *,id> *, NSError *))completion {
+- (void)collectHeaderBiddingParameters:(BDMAdUnit *)unit
+                            completion:(BDMCollectBiddingParamtersBlock)completion
+{
     [self syncMetadata];
     NSString *sdkKey = [Tapjoy.sharedTapjoyConnect limitedSdkKey];
     NSString *token = Tapjoy.getUserToken ?: @"1";
-    NSString *placement = ANY(parameters).from(BDMTapjoyPlacementKey).string;
+    NSString *placement = ANY(unit.params).from(BDMTapjoyPlacementKey).string;
     if (!sdkKey || !placement) {
         NSError *error = [NSError bdm_errorWithCode:BDMErrorCodeHeaderBiddingNetwork
                                         description:@"Tapjoy adapter was not receive valid bidding data"];
@@ -104,15 +106,15 @@ NSString *const BDMTapjoyPlacementKey     = @"placement_name";
 }
 
 - (void)tapjoyConnectionSuccess:(NSNotification *)notification {
-    STK_RUN_BLOCK(self.completion, YES, nil);
-    self.completion = nil;
+    STK_RUN_BLOCK(self.initialisationCompletion, YES, nil);
+    self.initialisationCompletion = nil;
 }
 
 - (void)tapjoyConnectionFailed:(NSNotification *)notification {
     NSError *error = [NSError bdm_errorWithCode:BDMErrorCodeHeaderBiddingNetwork
                                     description:@"Tapjoy sdk key is not valid string"];
-    STK_RUN_BLOCK(self.completion, YES, error);
-    self.completion = nil;
+    STK_RUN_BLOCK(self.initialisationCompletion, YES, error);
+    self.initialisationCompletion = nil;
 }
 
 #pragma mark - Private

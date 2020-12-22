@@ -29,8 +29,10 @@ NSString *const BDMAppRollIDKey                      = @"approll_id";
     return @"3.1.2";
 }
 
-- (void)initialiseWithParameters:(NSDictionary<NSString *,id> *)parameters
-                      completion:(void (^)(BOOL, NSError * _Nullable))completion {
+- (void)initializeWithParameters:(BDMStringToStringMap *)parameters
+                           units:(NSArray<BDMAdUnit *> *)units
+                      completion:(BDMInitializeBiddingNetworkBlock)completion
+{
     if (self.initialized) {
         STK_RUN_BLOCK(completion, NO, nil);
         return;

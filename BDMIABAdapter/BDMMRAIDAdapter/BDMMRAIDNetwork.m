@@ -10,6 +10,8 @@
 #import "BDMMRAIDBannerAdapter.h"
 #import "BDMMRAIDInterstitialAdapter.h"
 
+#import <StackMRAIDKit/StackMRAIDKit.h>
+
 
 NSString *const BDMMRAIDCreativeKey     = @"creative";
 NSString *const BDMMRAIDSkipOffsetKey   = @"skip_offset";
@@ -22,7 +24,7 @@ NSString *const BDMMRAIDNativeCloseKey  = @"use_native_close";
 }
 
 - (NSString *)sdkVersion {
-    return @"3.0";
+    return StackMRAIDKitVersion;
 }
 
 - (id<BDMFullscreenAdapter>)interstitialAdAdapterForSdk:(BDMSdk *)sdk {

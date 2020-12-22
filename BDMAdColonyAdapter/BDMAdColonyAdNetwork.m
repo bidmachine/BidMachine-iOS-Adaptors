@@ -14,7 +14,6 @@
 
 NSString *const BDMAdColonyAppIDKey     = @"app_id";
 NSString *const BDMAdColonyZoneIDKey    = @"zone_id";
-NSString *const BDMAdColonyZonesKey     = @"zones";
 NSString *const BDMAdColonyDataKey      = @"data";
 NSString *const BDMAdColonyAdmKey       = @"adm";
 
@@ -35,8 +34,10 @@ NSString *const BDMAdColonyAdmKey       = @"adm";
     return AdColony.getSDKVersion;
 }
 
-- (void)initialiseWithParameters:(NSDictionary<NSString *,id> *)parameters
-                      completion:(void (^)(BOOL, NSError *))completion {
+- (void)initializeWithParameters:(BDMStringToStringMap *)parameters
+                           units:(NSArray<BDMAdUnit *> *)units
+                      completion:(BDMInitializeBiddingNetworkBlock)completion
+{
     if (self.initialized) {
         STK_RUN_BLOCK(completion, NO, nil);
         return;
@@ -44,7 +45,9 @@ NSString *const BDMAdColonyAdmKey       = @"adm";
     
     
     NSString *appId = ANY(parameters).from(BDMAdColonyAppIDKey).string;
-    NSArray <NSString *> *zones = ANY(parameters).from(BDMAdColonyZonesKey).arrayOfString;
+    NSArray <NSString *> *zones = ANY(units)
+    .flatMap(^id(BDMAdUnit *unit){ return ANY(unit.params).from(BDMAdColonyZoneIDKey).string; })
+    .arrayOfString;
     
     if (!appId || !zones.count) {
         NSError *error = [NSError bdm_errorWithCode:BDMErrorCodeHeaderBiddingNetwork
@@ -64,10 +67,10 @@ NSString *const BDMAdColonyAdmKey       = @"adm";
     }];
 }
 
-- (void)collectHeaderBiddingParameters:(NSDictionary<NSString *,id> *)parameters
-                          adUnitFormat:(BDMAdUnitFormat)adUnitFormat
-                            completion:(void (^)(NSDictionary<NSString *,id> *, NSError *))completion {
-    NSString *zoneId = ANY(parameters).from(BDMAdColonyZoneIDKey).string;
+- (void)collectHeaderBiddingParameters:(BDMAdUnit *)unit
+                            completion:(BDMCollectBiddingParamtersBlock)completion
+{
+    NSString *zoneId = ANY(unit.params).from(BDMAdColonyZoneIDKey).string;
     NSString *signals = AdColony.collectSignals;
     // Check that we have zone id
     if (!zoneId || !signals) {
