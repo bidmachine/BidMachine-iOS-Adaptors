@@ -18,7 +18,7 @@
     return nil;
 }
 
-- (void)prepareContent:(NSDictionary<NSString *,NSString *> *)contentInfo {
+- (void)prepareContent:(BDMStringToObjectMap *)contentInfo {
      __weak typeof(self) weakSelf = self;
     STKNASTManager *manager = STKNASTManager.new;
     [manager parseAdFromJSON:contentInfo completion:^(STKNASTAd * ad, NSError * error) {

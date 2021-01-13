@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3706BBDBA118147D9CF5AFCA /* Pods_BDMCriteoAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18AF7F9997D3A54B519BAC06 /* Pods_BDMCriteoAdapter.framework */; };
+		370F963B25A480010040694F /* BDMMRAIDConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 370F963A25A480010040694F /* BDMMRAIDConfiguration.m */; };
 		3743A62C2507AFF2003DD6BF /* BDMNASTMediaController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3743A62B2507AFF2003DD6BF /* BDMNASTMediaController.m */; };
 		3743A62F2507B033003DD6BF /* BDMNASTActionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3743A62E2507B033003DD6BF /* BDMNASTActionController.m */; };
 		3743A6322507BB6C003DD6BF /* BDMNASTEventController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3743A6312507BB6C003DD6BF /* BDMNASTEventController.m */; };
@@ -202,6 +203,8 @@
 		2BAE3F987D328803AF794B31 /* Pods_BDMFacebookAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BDMFacebookAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BF7C2179014F943C1272B16 /* Pods_BDMAppRollAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BDMAppRollAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37022BD8256D487D00A9ACAC /* BidMachine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BidMachine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		370F963925A480010040694F /* BDMMRAIDConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDMMRAIDConfiguration.h; sourceTree = "<group>"; };
+		370F963A25A480010040694F /* BDMMRAIDConfiguration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDMMRAIDConfiguration.m; sourceTree = "<group>"; };
 		3743A62A2507AFF2003DD6BF /* BDMNASTMediaController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDMNASTMediaController.h; sourceTree = "<group>"; };
 		3743A62B2507AFF2003DD6BF /* BDMNASTMediaController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDMNASTMediaController.m; sourceTree = "<group>"; };
 		3743A62D2507B033003DD6BF /* BDMNASTActionController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDMNASTActionController.h; sourceTree = "<group>"; };
@@ -532,6 +535,8 @@
 			children = (
 				42C3FDAA21620E95004D3784 /* BDMMRAIDNetwork.h */,
 				42C3FDAB21620E95004D3784 /* BDMMRAIDNetwork.m */,
+				370F963925A480010040694F /* BDMMRAIDConfiguration.h */,
+				370F963A25A480010040694F /* BDMMRAIDConfiguration.m */,
 				42C3FDA821620E95004D3784 /* BDMMRAIDBannerAdapter.h */,
 				42C3FDA721620E95004D3784 /* BDMMRAIDBannerAdapter.m */,
 				42C3FDA521620E95004D3784 /* BDMMRAIDInterstitialAdapter.h */,
@@ -1334,6 +1339,7 @@
 			files = (
 				42C3FDAD21620E95004D3784 /* BDMMRAIDBannerAdapter.m in Sources */,
 				42C3FDAF21620E95004D3784 /* BDMMRAIDNetwork.m in Sources */,
+				370F963B25A480010040694F /* BDMMRAIDConfiguration.m in Sources */,
 				42BE023422A56A6000D391CC /* BDMMRAIDInterstitialAdapter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

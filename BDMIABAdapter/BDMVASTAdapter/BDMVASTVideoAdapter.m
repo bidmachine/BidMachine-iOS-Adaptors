@@ -15,11 +15,10 @@
 #import "BDMVASTVideoAdapter.h"
 
 
-@interface BDMVASTVideoAdapter () <STKVASTControllerDelegate, STKProductControllerDelegate>
+@interface BDMVASTVideoAdapter () <STKVASTControllerDelegate>
 
 @property (nonatomic, strong) STKVASTController *videoController;
-@property (nonatomic, strong) STKProductController *productPresenter;
-@property (nonatomic,   copy) NSDictionary<NSString *,NSString *> * contentInfo;
+@property (nonatomic,   copy) BDMStringToObjectMap *contentInfo;
 
 @end
 
@@ -29,18 +28,18 @@
     return self.videoController.view;
 }
 
-- (void)prepareContent:(NSDictionary<NSString *,NSString *> *)contentInfo {
-    NSString *rawXML        = ANY(contentInfo).from(BDMVASTCreativeKey).string;
+- (void)prepareContent:(BDMStringToObjectMap *)contentInfo {
+    NSString *rawXML        = ANY(contentInfo).from(kBDMCreativeAdm).string;
     NSData *xmlData         = [rawXML dataUsingEncoding:NSUTF8StringEncoding];
     self.contentInfo        = contentInfo;
     
     self.videoController    = [[STKVASTController alloc] initWithConfiguration: [STKVASTControllerConfiguration configuration:^(STKVASTControllerConfigurationBuilder *builder) {
         builder.appendRewarded(self.rewarded);
         builder.appendAutoclose(NO);
-        builder.appendForceCloseTime(ANY(contentInfo).from(BDMVASTUseNativeCloseKey).number.boolValue);
-        builder.appendCloseTime(ANY(contentInfo).from(BDMVASTCompanionSkipOffsetKey).number.doubleValue);
-        builder.appendMaxDuration(ANY(contentInfo).from(BDMVASTMaxDurationKey).number.doubleValue ?: 180);
-        builder.appendVideoCloseTime(ANY(contentInfo).from(BDMVASTVideoSkipOffsetKey).number.doubleValue);
+        builder.appendForceCloseTime(ANY(contentInfo).from(kBDMCreativeUseNativeClose).number.boolValue);
+        builder.appendMaxDuration(180);
+        builder.appendVideoCloseTime(ANY(contentInfo).from(kBDMCreativeCloseTime).number.doubleValue);
+        builder.appendProductParameters(ANY(contentInfo).from(kBDMCreativeStoreParams).value);
     }]];
     
     [self.videoController setDelegate:self];
@@ -49,24 +48,6 @@
 
 - (void)present {
     [self.videoController presentFromViewController:self.rootViewController];
-}
-
-#pragma mark - Private
-
-- (STKProductController *)productPresenter {
-    if (!_productPresenter) {
-        _productPresenter = [STKProductController new];
-        _productPresenter.delegate = self;
-    }
-    return _productPresenter;
-}
-
-- (NSDictionary *(^)(NSString *))productParameters {
-    return ^NSDictionary *(NSString *url){
-        NSMutableDictionary *productParameters = self.contentInfo.mutableCopy;
-        productParameters[STKProductParameterClickThrough] = url;
-        return productParameters.copy;
-    };
 }
 
 #pragma mark - STKVASTControllerDelegate
@@ -81,11 +62,6 @@
 
 - (void)vastController:(STKVASTController *)controller didFailWhileShow:(NSError *)error {
     [self.displayDelegate adapter:self failedToPresentAdWithError: [error bdm_wrappedWithCode:BDMErrorCodeBadContent]];
-}
-
-- (void)vastControllerDidClick:(STKVASTController *)controller clickURL:(NSString *)clickURL {
-    [STKSpinnerScreen show];
-    [self.productPresenter presentProductWithParameters:self.productParameters(clickURL)];
 }
 
 - (void)vastControllerDidDismiss:(STKVASTController *)controller {
@@ -104,31 +80,24 @@
     // NO-OP
 }
 
-#pragma mark - STKVASTControllerDelegate parameters
+- (BOOL)vastController:(nonnull STKVASTController *)controller shouldProcessNavigationWithURL:(nonnull NSURL *)URL {
+    return YES;
+}
+
+- (void)vastControllerWillLeaveApplication:(nonnull STKVASTController *)controller {
+    [self.displayDelegate adapterRegisterUserInteraction:self];
+}
+
+- (void)vastControllerWillPresentProductScreen:(nonnull STKVASTController *)controller {
+    [self.displayDelegate adapterRegisterUserInteraction:self];
+}
+
+- (void)vastControllerDidDismissProductScreen:(nonnull STKVASTController *)controller {
+    // NO-OP
+}
 
 - (UIViewController *)rootViewController {
     return [self.displayDelegate rootViewControllerForAdapter:self] ?: UIViewController.stk_topPresentedViewController;
-}
-
-#pragma mark - STKProductControllerDelegate
-
-- (void)controller:(STKProductController *)controller didFailToPresentWithError:(NSError *)error {
-    [STKSpinnerScreen hide];
-}
-
-- (void)controller:(STKProductController *)controller willLeaveApplicationToProductWithParameters:(NSDictionary <NSString *, id> *)parameters {
-    [self.displayDelegate adapterRegisterUserInteraction:self];
-    [STKSpinnerScreen hide];
-}
-
-- (void)controller:(STKProductController *)controller willPresentProductWithParameters:(NSDictionary <NSString *, id> *)parameters {
-    [self.displayDelegate adapterRegisterUserInteraction:self];
-    [self.videoController pause];
-    [STKSpinnerScreen hide];
-}
-
-- (void)controller:(STKProductController *)controller didDismissProductWithParameters:(NSDictionary <NSString *, id> *)parameters {
-     [self.videoController resume];
 }
 
 @end

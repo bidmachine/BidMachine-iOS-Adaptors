@@ -28,7 +28,7 @@
     return self.banner;
 }
 
-- (void)prepareContent:(NSDictionary<NSString *,NSString *> *)contentInfo {
+- (void)prepareContent:(BDMStringToObjectMap *)contentInfo {
     NSString *slot = ANY(contentInfo).from(BDMMyTargetSlotIDKey).string;
     NSString *bid = ANY(contentInfo).from(BDMMyTargetBidIDKey).string;
     

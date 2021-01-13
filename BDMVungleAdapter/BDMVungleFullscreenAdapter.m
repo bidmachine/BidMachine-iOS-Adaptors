@@ -24,7 +24,7 @@
     return nil;
 }
 
-- (void)prepareContent:(NSDictionary<NSString *,NSString *> *)contentInfo {
+- (void)prepareContent:(BDMStringToObjectMap *)contentInfo {
     self.placement = ANY(contentInfo).from(BDMVunglePlacementIDKey).string;
     if (self.placement && [VungleSDK.sharedSDK isAdCachedForPlacementID:self.placement]) {
         [self.loadingDelegate adapterPreparedContent:self];

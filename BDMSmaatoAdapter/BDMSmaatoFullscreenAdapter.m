@@ -28,7 +28,7 @@
     return nil;
 }
 
-- (void)prepareContent:(nonnull NSDictionary<NSString *,NSString *> *)contentInfo {
+- (void)prepareContent:(BDMStringToObjectMap *)contentInfo {
     NSString *adSpaceId = ANY(contentInfo).from(BDMSmaatoSpaceIDKey).string;
     if (!adSpaceId) {
         NSError *error = [NSError bdm_errorWithCode:BDMErrorCodeBadContent

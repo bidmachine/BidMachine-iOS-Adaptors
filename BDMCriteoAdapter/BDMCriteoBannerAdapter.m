@@ -30,7 +30,7 @@
     return self.bannerView;
 }
 
-- (void)prepareContent:(NSDictionary<NSString *,NSString *> *)contentInfo {
+- (void)prepareContent:(BDMStringToObjectMap *)contentInfo {
     NSString *adUnitId = ANY(contentInfo).from(BDMCriteoAdUnitIDKey).string;
     if (!adUnitId) {
         NSError *error = [NSError bdm_errorWithCode:BDMErrorCodeBadContent

@@ -10,19 +10,17 @@
 @import StackMRAIDKit;
 @import StackFoundation;
 
-#import "BDMMRAIDNetwork.h"
+#import "BDMMRAIDConfiguration.h"
 #import "BDMMRAIDBannerAdapter.h"
 
 
 const CGSize kBDMAdSize320x50  = {.width = 320.0f, .height = 50.0f  };
 const CGSize kBDMAdSize728x90  = {.width = 728.0f, .height = 90.0f  };
 
-@interface BDMMRAIDBannerAdapter () <STKMRAIDAdDelegate, STKMRAIDServiceDelegate, STKMRAIDViewPresenterDelegate, STKProductControllerDelegate>
+@interface BDMMRAIDBannerAdapter () <STKMRAIDAdDelegate, STKMRAIDServiceDelegate, STKMRAIDViewPresenterDelegate>
 
 @property (nonatomic, strong) STKMRAIDAd *ad;
 @property (nonatomic, strong) STKMRAIDViewPresenter *presenter;
-@property (nonatomic, strong) STKProductController *productPresenter;
-@property (nonatomic,   copy) NSDictionary<NSString *,NSString *> * contentInfo;
 
 @property (nonatomic,   weak) UIView *container;
 
@@ -34,17 +32,16 @@ const CGSize kBDMAdSize728x90  = {.width = 728.0f, .height = 90.0f  };
     return self.presenter;
 }
 
-- (void)prepareContent:(NSDictionary<NSString *,NSString *> *)contentInfo {
+- (void)prepareContent:(BDMStringToObjectMap *)contentInfo {
     CGSize bannerSize               = [self sizeFromContentInfo:contentInfo];
     CGRect frame                    = (CGRect){.size = bannerSize};
-    NSArray *mraidFeatures          = @[kMRAIDSupportsInlineVideo, kMRAIDSupportsLoging];
+    NSArray *mraidFeatures          = @[kMRAIDSupportsInlineVideo, kMRAIDSupportsLogging];
     
-    self.adContent                  = ANY(contentInfo).from(BDMMRAIDCreativeKey).string;
-    self.contentInfo                = contentInfo;
+    self.adContent                  = ANY(contentInfo).from(kBDMCreativeAdm).string;
     self.ad                         = [STKMRAIDAd new];
     self.ad.delegate                = self;
     self.ad.service.delegate        = self;
-    self.presenter                  = [STKMRAIDViewPresenter new];
+    self.presenter                  = [[STKMRAIDViewPresenter alloc] initWithConfiguration:[BDMMRAIDConfiguration configuraton:contentInfo]];
     self.presenter.delegate         = self;
     self.presenter.frame            = frame;
     
@@ -61,17 +58,9 @@ const CGSize kBDMAdSize728x90  = {.width = 728.0f, .height = 90.0f  };
 
 #pragma mark - Private
 
-- (STKProductController *)productPresenter {
-    if (!_productPresenter) {
-        _productPresenter = [STKProductController new];
-        _productPresenter.delegate = self;
-    }
-    return _productPresenter;
-}
-
 - (CGSize)sizeFromContentInfo:(NSDictionary *)contentInfo {
-    NSNumber *width     = contentInfo[@"width"]  ? : contentInfo[@"w"];
-    NSNumber *height    = contentInfo[@"height"] ? : contentInfo[@"h"];
+    NSNumber *width     = ANY(contentInfo).from(kBDMCreativeWidth).number;
+    NSNumber *height    = ANY(contentInfo).from(kBDMCreativeHeight).number;
     
     if (ANY(width).number <= 0 || ANY(height).number <= 0) {
         return [self defaultAdSize];
@@ -84,14 +73,6 @@ const CGSize kBDMAdSize728x90  = {.width = 728.0f, .height = 90.0f  };
     return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? kBDMAdSize728x90 : kBDMAdSize320x50;
 }
 
-- (NSDictionary *(^)(NSURL *))productParameters {
-    return ^NSDictionary *(NSURL *url){
-        NSMutableDictionary *productParameters = self.contentInfo.mutableCopy;
-        productParameters[STKProductParameterClickThrough] = url;
-        return productParameters.copy;
-    };
-}
-
 #pragma mark - STKMRAIDAdDelegate
 
 - (void)didLoadAd:(STKMRAIDAd *)ad {
@@ -102,13 +83,8 @@ const CGSize kBDMAdSize728x90  = {.width = 728.0f, .height = 90.0f  };
     [self.loadingDelegate adapter:self failedToPrepareContentWithError:error];
 }
 
-- (void)didUserInteractionAd:(STKMRAIDAd *)ad withURL:(NSURL *)url {
-    [STKSpinnerScreen show];
-    [self.productPresenter presentProductWithParameters:self.productParameters(url)];
-}
-
-- (UIViewController *)presenterRootViewController {
-    return [self.displayDelegate rootViewControllerForAdapter:self] ?: UIViewController.stk_topPresentedViewController;
+- (BOOL)ad:(STKMRAIDAd *)ad shouldProcessNavigationWithURL:(NSURL *)URL {
+    return YES;
 }
 
 #pragma mark - STKMRAIDServiceDelegate
@@ -117,31 +93,24 @@ const CGSize kBDMAdSize728x90  = {.width = 728.0f, .height = 90.0f  };
     BDMLog(@"%@", message);
 }
 
-- (void)mraidServicePreloadProductUrl:(NSURL *)url {
-    [self.productPresenter loadProductWithParameters:self.productParameters(url)];
-}
+#pragma mark - STKMRAIDViewPresenterDelegate
 
-#pragma mark - STKProductControllerDelegate
-
-- (void)controller:(STKProductController *)controller didFailToPresentWithError:(NSError *)error {
-    [STKSpinnerScreen hide];
-}
-
-- (void)controller:(STKProductController *)controller willPresentProductWithParameters:(NSDictionary <NSString *, id> *)parameters {
-    [self.displayDelegate adapterRegisterUserInteraction:self];
-    [self.displayDelegate adapterWillPresentScreen:self];
-    [STKSpinnerScreen hide];
-}
-
-- (void)controller:(STKProductController *)controller didDismissProductWithParameters:(NSDictionary <NSString *, id> *)parameters {
-     [self.displayDelegate adapterDidDismissScreen:self];
-}
-
-- (void)controller:(STKProductController *)controller willLeaveApplicationToProductWithParameters:(NSDictionary <NSString *, id> *)parameters {
+- (void)presenterWillLeaveApplication:(id<STKMRAIDPresenter>)presenter {
     [self.displayDelegate adapterRegisterUserInteraction:self];
     [self.displayDelegate adapterWillLeaveApplication:self];
-    [STKSpinnerScreen hide];
-    
+}
+
+- (void)presenterWillPresentProductScreen:(id<STKMRAIDPresenter>)presenter {
+    [self.displayDelegate adapterRegisterUserInteraction:self];
+    [self.displayDelegate adapterWillPresentScreen:self];
+}
+
+- (void)presenterDidDismissProductScreen:(id<STKMRAIDPresenter>)presenter {
+    [self.displayDelegate adapterDidDismissScreen:self];
+}
+
+- (UIViewController *)presenterRootViewController {
+    return [self.displayDelegate rootViewControllerForAdapter:self] ?: UIViewController.stk_topPresentedViewController;
 }
 
 @end

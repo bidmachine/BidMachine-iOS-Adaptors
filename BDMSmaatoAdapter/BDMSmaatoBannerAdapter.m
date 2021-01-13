@@ -26,7 +26,7 @@
     return self.bannerView;
 }
 
-- (void)prepareContent:(NSDictionary<NSString *,NSString *> *)contentInfo {
+- (void)prepareContent:(BDMStringToObjectMap *)contentInfo {
     NSString *adSpaceId = ANY(contentInfo).from(BDMSmaatoSpaceIDKey).string;
     if (!adSpaceId) {
         NSError *error = [NSError bdm_errorWithCode:BDMErrorCodeBadContent

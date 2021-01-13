@@ -27,7 +27,7 @@
     return nil;
 }
 
-- (void)prepareContent:(NSDictionary<NSString *,NSString *> *)contentInfo {
+- (void)prepareContent:(BDMStringToObjectMap *)contentInfo {
     NSString *placement = ANY(contentInfo).from(BDMFacebookPlacementIDKey).string;
     NSString *payload = ANY(contentInfo).from(BDMFacebookBidPayloadIDKey).string;
     

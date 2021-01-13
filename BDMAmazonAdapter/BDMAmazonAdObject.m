@@ -14,7 +14,7 @@
     return UIView.new;
 }
 
-- (void)prepareContent:(NSDictionary<NSString *,NSString *> *)contentInfo {}
+- (void)prepareContent:(BDMStringToObjectMap *)contentInfo {}
 
 - (void)presentInContainer:(UIView *)container {}
 
@@ -27,7 +27,7 @@
     return UIView.new;
 }
 
-- (void)prepareContent:(nonnull NSDictionary<NSString *,NSString *> *)contentInfo { }
+- (void)prepareContent:(BDMStringToObjectMap *)contentInfo { }
 
 - (void)present { }
 

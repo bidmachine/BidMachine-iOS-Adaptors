@@ -12,12 +12,6 @@
 #import <StackVASTKit/StackVASTKit.h>
 
 
-NSString *const BDMVASTCreativeKey                  = @"creative";
-NSString *const BDMVASTMaxDurationKey               = @"max_duration";
-NSString *const BDMVASTUseNativeCloseKey            = @"use_native_close";
-NSString *const BDMVASTVideoSkipOffsetKey           = @"skip_offset";
-NSString *const BDMVASTCompanionSkipOffsetKey       = @"companion_skip_offset";
-
 @implementation BDMVASTNetwork
 
 #pragma mark - BDMNetwork

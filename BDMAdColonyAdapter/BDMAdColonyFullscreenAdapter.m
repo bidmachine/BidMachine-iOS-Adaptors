@@ -24,7 +24,7 @@
     return nil;
 }
 
-- (void)prepareContent:(NSDictionary<NSString *,NSString *> *)contentInfo {
+- (void)prepareContent:(BDMStringToObjectMap *)contentInfo {
     NSString *zone = ANY(contentInfo).from(BDMAdColonyZoneIDKey).string;
     NSString *adm = ANY(contentInfo).from(BDMAdColonyAdmKey).string;
     if (!zone || !adm) {

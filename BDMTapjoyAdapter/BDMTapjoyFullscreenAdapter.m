@@ -25,7 +25,7 @@
     return nil;
 }
 
-- (void)prepareContent:(NSDictionary<NSString *,NSString *> *)contentInfo {
+- (void)prepareContent:(BDMStringToObjectMap *)contentInfo {
     NSString *placementName = ANY(contentInfo).from(BDMTapjoyPlacementKey).string;
     if (!placementName) {
         NSError *error = [NSError bdm_errorWithCode:BDMErrorCodeBadContent

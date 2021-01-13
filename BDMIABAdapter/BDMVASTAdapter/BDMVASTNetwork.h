@@ -12,12 +12,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-FOUNDATION_EXPORT NSString *const BDMVASTCreativeKey;
-FOUNDATION_EXPORT NSString *const BDMVASTMaxDurationKey;
-FOUNDATION_EXPORT NSString *const BDMVASTUseNativeCloseKey;
-FOUNDATION_EXPORT NSString *const BDMVASTVideoSkipOffsetKey;
-FOUNDATION_EXPORT NSString *const BDMVASTCompanionSkipOffsetKey;
-
 @interface BDMVASTNetwork : NSObject <BDMNetwork>
 
 @end
