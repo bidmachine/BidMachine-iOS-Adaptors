@@ -58,11 +58,11 @@
     });
     asset.insets            = ({
         NSString *padding = ANY(info).from(kBDMAssetPadding).string;
-        UIEdgeInsetsFromSTKIABString(padding, UIEdgeInsetsZero);
+        UIEdgeInsetsFromSTKIABString(padding, STKIABDefaultInsets());
     });
     asset.margin            = ({
         NSString *margin = ANY(info).from(kBDMAssetMargin).string;
-        UIEdgeInsetsFromSTKIABString(margin, UIEdgeInsetsZero);
+        UIEdgeInsetsFromSTKIABString(margin, STKIABDefaultInsets());
     });
     asset.font              = ({
         NSString *font = ANY(info).from(kBDMAssetFont).string;
