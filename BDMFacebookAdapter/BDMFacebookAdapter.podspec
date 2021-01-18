@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
-  sdkVersion        = "1.7.0.1-Beta"
-  adapterVersion    = "1.7.0.1.0-Beta"
+  sdkVersion        = "1.7.0.2-Beta"
+  adapterVersion    = "1.7.0.2.0-Beta"
   networkVersion    = "6.2.0"
   sourceName        = "BDMFacebookAdapter"
   tag               = "#{sourceName}-#{adapterVersion}"

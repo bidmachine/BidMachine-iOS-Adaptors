@@ -78,7 +78,7 @@ or
 - *BDMAmazonAdapter* 	= **3.3.0**
 - *BDMCriteoAdapter* 	= **4.0.1**
 - *BDMFacebookAdapter* 	= **6.2.0**
-- *BDMIABAdapter* 		= **1.1.0**
+- *BDMIABAdapter* 		= **1.2.0-Beta.3**
 - *BDMMyTargetAdapter* 	= **5.9.7**
 - *BDMSmaatoAdapter* 	= **21.6.8**
 - *BDMTapjoyAdapter* 	= **12.7.0**
