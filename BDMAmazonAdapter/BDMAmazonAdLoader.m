@@ -69,6 +69,11 @@
     self.completion = completion;
     self.loader = [DTBAdLoader new];
     
+    NSString *ccpaString = BDMSdk.sharedSdk.restrictions.USPrivacyString;
+    if (BDMSdk.sharedSdk.restrictions.subjectToCCPA && ccpaString) {
+        [self.loader putCustomTarget:ccpaString withKey:@"us_privacy"];
+    }
+    
     BDMAmazonCallbackProxy *proxy = [BDMAmazonCallbackProxy new];
     proxy.delegate = self;
     

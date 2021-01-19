@@ -93,7 +93,6 @@ NSString *const BDMAmazonSlotIdKey  = @"slot_uuid";
 - (void)syncMetadata {
     [DTBAds.sharedInstance setLogLevel:BDMSdkLoggingEnabled ? DTBLogLevelAll : DTBLogLevelOff];
 
-    DTBAds.sharedInstance.testMode = YES;
     DTBAds.sharedInstance.mraidPolicy = CUSTOM_MRAID;
     DTBAds.sharedInstance.mraidCustomVersions = @[@"1.0", @"2.0", @"3.0"];
     
