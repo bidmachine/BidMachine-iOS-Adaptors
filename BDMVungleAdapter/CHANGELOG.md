@@ -1,3 +1,7 @@
+## 1.7.0.2.1-Beta
+
+- *VungleSDK-iOS* **6.9.1**
+
 ## 1.7.0.2.0-Beta
 
 - Update Vungle Adapter
