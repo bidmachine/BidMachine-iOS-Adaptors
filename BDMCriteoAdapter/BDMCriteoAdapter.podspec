@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   sdkVersion        = "1.7.0.2-Beta"
-  adapterVersion    = "1.7.0.2.0-Beta"
+  adapterVersion    = "1.7.0.2.1-Beta"
   networkVersion    = "4.0.1"
   sourceName        = "BDMCriteoAdapter"
   tag               = "#{sourceName}-#{adapterVersion}"
@@ -20,7 +20,7 @@ Pod::Spec.new do |spec|
 
   spec.platform     = :ios, "10.0"
   spec.source       = { :git => 'git@github.com:bidmachine/BidMachine-iOS-Adaptors.git', :tag => "v#{tag}" }
-  spec.source_files = "#{sourceName}/*.{h,m}"
+  spec.source_files = "#{sourceName}/*.{swift,h,m}"
 
   spec.dependency "BidMachine", "#{sdkVersion}"
   spec.dependency "CriteoPublisherSdk", "#{networkVersion}"
