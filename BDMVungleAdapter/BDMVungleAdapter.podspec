@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   sdkVersion        = "1.7.0.2-Beta"
-  adapterVersion    = "1.7.0.2.0-Beta"
-  networkVersion    = "6.8.1"
+  adapterVersion    = "1.7.0.2.1-Beta"
+  networkVersion    = "6.9.1"
   sourceName        = "BDMVungleAdapter"
   tag               = "#{sourceName}-#{adapterVersion}"
 
