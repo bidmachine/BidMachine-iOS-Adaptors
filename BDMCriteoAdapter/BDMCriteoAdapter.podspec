@@ -20,7 +20,7 @@ Pod::Spec.new do |spec|
 
   spec.platform     = :ios, "10.0"
   spec.source       = { :git => 'git@github.com:bidmachine/BidMachine-iOS-Adaptors.git', :tag => "v#{tag}" }
-  spec.source_files = "#{sourceName}/*.{swift,h,m}"
+  spec.source_files = "#{sourceName}/*.{h,m}"
 
   spec.dependency "BidMachine", "#{sdkVersion}"
   spec.dependency "CriteoPublisherSdk", "#{networkVersion}"
