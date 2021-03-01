@@ -28,7 +28,7 @@
 }
 
 - (void)prepareContent:(BDMStringToObjectMap *)contentInfo {
-    NSArray *mraidFeatures      = @[kMRAIDSupportsInlineVideo, kMRAIDSupportsLogging, kMRAIDPreloadURL];
+    NSArray *mraidFeatures      = @[kMRAIDSupportsInlineVideo, kMRAIDSupportsLogging, kMRAIDPreloadURL, kMRAIDMeasure];
 
     self.adContent              = ANY(contentInfo).from(kBDMCreativeAdm).string;
     self.ad                     = [STKMRAIDAd new];
@@ -38,6 +38,8 @@
     self.presenter.delegate     = self;
     
     [self.ad.service.configuration registerServices:mraidFeatures];
+    self.ad.service.configuration.partnerName = kBDMOMPartnerName;
+    self.ad.service.configuration.partnerVersion = kBDMVersion;
     [self.ad loadHTML:self.adContent];
 }
 

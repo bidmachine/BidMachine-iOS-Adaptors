@@ -35,7 +35,7 @@ const CGSize kBDMAdSize728x90  = {.width = 728.0f, .height = 90.0f  };
 - (void)prepareContent:(BDMStringToObjectMap *)contentInfo {
     CGSize bannerSize               = [self sizeFromContentInfo:contentInfo];
     CGRect frame                    = (CGRect){.size = bannerSize};
-    NSArray *mraidFeatures          = @[kMRAIDSupportsInlineVideo, kMRAIDSupportsLogging];
+    NSArray *mraidFeatures          = @[kMRAIDSupportsInlineVideo, kMRAIDSupportsLogging, kMRAIDMeasure];
     
     self.adContent                  = ANY(contentInfo).from(kBDMCreativeAdm).string;
     self.ad                         = [STKMRAIDAd new];
@@ -46,6 +46,8 @@ const CGSize kBDMAdSize728x90  = {.width = 728.0f, .height = 90.0f  };
     self.presenter.frame            = frame;
     
     [self.ad.service.configuration registerServices:mraidFeatures];
+    self.ad.service.configuration.partnerName = kBDMOMPartnerName;
+    self.ad.service.configuration.partnerVersion = kBDMVersion;
     [self.ad loadHTML:self.adContent];
 }
 

@@ -31,7 +31,7 @@ NSString *const BDMCriteoOrienationKey              = @"orientation";
 }
 
 - (NSString *)sdkVersion {
-    return @"3.4.1";
+    return @"4.0.1";
 }
 
 - (NSMapTable *)bidStorage {

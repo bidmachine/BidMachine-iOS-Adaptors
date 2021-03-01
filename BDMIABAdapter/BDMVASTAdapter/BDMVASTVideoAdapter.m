@@ -40,6 +40,9 @@
         builder.appendMaxDuration(180);
         builder.appendVideoCloseTime(ANY(contentInfo).from(kBDMCreativeCloseTime).number.doubleValue);
         builder.appendProductParameters(ANY(contentInfo).from(kBDMCreativeStoreParams).value);
+        builder.appendPartnerName(kBDMOMPartnerName);
+        builder.appendPartnerVersion(kBDMVersion);
+        builder.appendMeasuring(YES);
     }]];
     
     [self.videoController setDelegate:self];
