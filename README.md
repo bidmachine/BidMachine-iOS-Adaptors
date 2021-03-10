@@ -77,7 +77,7 @@ or
 - *BDMAdColonyAdapter* 	= **4.4.1.1**
 - *BDMAmazonAdapter* 	= **3.3.0**
 - *BDMCriteoAdapter* 	= **4.0.1**
-- *BDMFacebookAdapter* 	= **6.2.1**
+- *BDMFacebookAdapter* 	= **6.3.0**
 - *BDMIABAdapter* 		= **1.2.0**
 - *BDMMyTargetAdapter* 	= **5.9.11**
 - *BDMSmaatoAdapter* 	= **21.6.8**
