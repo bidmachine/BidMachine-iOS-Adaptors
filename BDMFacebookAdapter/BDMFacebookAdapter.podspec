@@ -25,8 +25,16 @@ Pod::Spec.new do |spec|
   spec.dependency "BidMachine", "#{sdkVersion}"
   spec.dependency "FBAudienceNetwork", "#{networkVersion}"
 
-  spec.static_framework         = true
-  spec.pod_target_xcconfig      = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
-  spec.user_target_xcconfig     = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+  spec.static_framework    = true
+  spec.pod_target_xcconfig = {
+    "VALID_ARCHS": "arm64 armv7 armv7s x86_64",
+    "VALID_ARCHS[sdk=iphoneos*]": "arm64 armv7 armv7s",
+    "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
+  }
+  spec.user_target_xcconfig = {
+    "VALID_ARCHS": "arm64 armv7 armv7s x86_64",
+    "VALID_ARCHS[sdk=iphoneos*]": "arm64 armv7 armv7s",
+    "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
+  }
 
 end
