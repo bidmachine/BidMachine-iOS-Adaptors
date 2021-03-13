@@ -31,7 +31,7 @@ NSString *const BDMCriteoOrienationKey              = @"orientation";
 }
 
 - (NSString *)sdkVersion {
-    return @"4.0.1";
+    return CRITEO_PUBLISHER_SDK_VERSION;
 }
 
 - (NSMapTable *)bidStorage {
@@ -109,7 +109,7 @@ NSString *const BDMCriteoOrienationKey              = @"orientation";
     __weak typeof(self) weakSelf = self;
     CRAdUnit *adUnit = [self adUnitByFormat:unit.format adUnitId:adUnitId];
     [[Criteo sharedCriteo] loadBidForAdUnit:adUnit responseHandler:^(CRBid * _Nullable bid) {
-        if (!bid) {
+        if (!bid || bid.price <= 0) {
             NSError *error = [NSError bdm_errorWithCode:BDMErrorCodeHeaderBiddingNetwork
                                             description:@"Criteo adapter bid response not ready"];
             STK_RUN_BLOCK(completion, nil, error);
